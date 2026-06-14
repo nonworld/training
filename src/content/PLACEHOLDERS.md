@@ -23,13 +23,28 @@ sparkling.
 
 ## Module copy
 
-- **Product Mastery** — built end to end as the reference standard. The segment
-  body copy, objectives, practical task and quiz are drafts for your review.
-- All other modules (Brand Story, Category & Market Context, the five Rep
-  modules, the five Venue modules) are **scaffolded only** — title, summary and
-  objectives are placeholders, segments not yet written. They show as "Soon".
+All 13 modules are now built end to end (segments, objectives, practical task,
+quiz). The copy is drafted in the NON voice for your review:
+
+- **Shared core:** Brand Story, Product Mastery, Category & Market Context.
+- **Rep track:** List Placement & the Venue Pitch, Reading a Beverage Program,
+  Commercial Objection Handling, Distributor & Reorder Conversations, Account
+  Planning.
+- **Venue track:** Recommending NON to a Guest, The Trade-Up Conversation,
+  Pour/Temperature & Glassware Ritual, Pairing to a Real Menu, Handling the
+  Sceptical Guest.
+
+### Inline [DRAFT] facts that need your real figures
+
+- **Category & Market Context > "A category, not a fad"** — needs real NON
+  market/category growth figures and sources.
+- **Venue > Serve Ritual** and the SKU cards — confirm the glassware standard
+  and exact serve temperatures per SKU.
 
 ## Certification copy
 
-- Pass threshold set to **80%** for both tracks — confirm.
+- Two final role exams (6 questions each) plus per-module quizzes. Pass threshold
+  **80%** throughout — confirm.
+- A track certifies only after every module in it is complete and the final exam
+  is passed.
 - Badge names: "NON Certified Sommelier" (venue), "NON Rep Accreditation" (rep).

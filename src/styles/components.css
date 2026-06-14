@@ -116,9 +116,11 @@
   border-radius: 999px;
   background: var(--non-white);
 }
-.objectives li.met,
-.objectives li:has(+ .met) {
+.objectives li.met {
   color: var(--ok);
+}
+.objectives li.met::before {
+  background: var(--ok);
 }
 
 /* ----------------------------------------------------- segment reader */
