@@ -1,0 +1,25 @@
+{
+  "name": "non-academy",
+  "private": true,
+  "version": "0.1.0",
+  "description": "NON Academy — mobile-first training and certification for NON sales reps and venue staff",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=non-academy --branch=main"
+  },
+  "dependencies": {
+    "i18next": "^23.16.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.1.0",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.0",
+    "wrangler": "^3.90.0"
+  }
+}

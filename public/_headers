@@ -1,0 +1,8 @@
+# Quick-reference SKU cards must be readable on shift with poor signal.
+# Cache the built static assets aggressively; the SPA shell stays fresh.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

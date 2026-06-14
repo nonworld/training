@@ -1,0 +1,322 @@
+/* =============================================================================
+ * NON Academy — design system
+ * Inherits the NON house style: Helvetica only, white on dark, restrained.
+ * Palette and tap target lifted from the existing non-ar / maps projects so the
+ * Academy sits inside the same visual world.
+ * Mobile-first: everything is built for a one-handed vertical phone first, then
+ * allowed to breathe on larger screens (rep track on a laptop).
+ * Layouts avoid fixed widths/heights on text so German and French — which run
+ * longer than English — wrap instead of clipping.
+ * ============================================================================= */
+
+:root {
+  --non-dark: #0b0b0b;
+  --non-raise: #141414; /* raised surface: cards, sheets */
+  --non-raise-2: #1c1c1c; /* second raise: inputs, chips */
+  --non-white: #ffffff;
+  --non-dim: rgba(255, 255, 255, 0.62);
+  --non-faint: rgba(255, 255, 255, 0.38);
+  --non-line: rgba(255, 255, 255, 0.18);
+  --non-line-soft: rgba(255, 255, 255, 0.1);
+  --non-panel: rgba(11, 11, 11, 0.82);
+
+  --ok: #8fd19e;
+  --no: #e2a0a0;
+
+  --tap: 56px; /* minimum one-handed tap target */
+  --shell-max: 720px; /* readable column even on a laptop */
+  --pad: 20px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--non-dark);
+  color: var(--non-white);
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The NON logotype is the wordmark SVG. Never translated, never restyled. */
+.logotype {
+  display: block;
+  height: 20px;
+  width: auto;
+}
+.logotype svg {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+/* ---------------------------------------------------------------- app shell */
+.shell {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(var(--safe-top) + 14px) var(--pad) 14px;
+  background: var(--non-panel);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--non-line-soft);
+}
+.appbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.appbar-back {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--non-dim);
+  font-size: 22px;
+  line-height: 1;
+  padding: 6px 4px;
+  cursor: pointer;
+  min-width: 32px;
+}
+
+.page {
+  flex: 1;
+  padding: var(--pad);
+  padding-bottom: calc(var(--safe-bottom) + 48px);
+  animation: rise 0.28s ease;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ----------------------------------------------------------------- type */
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--non-faint);
+  margin: 0 0 10px;
+}
+h1 {
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+p {
+  margin: 0 0 14px;
+  color: var(--non-dim);
+}
+.lede {
+  font-size: 17px;
+  color: var(--non-white);
+}
+
+/* --------------------------------------------------------------- buttons */
+.btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 24px;
+  background: var(--non-white);
+  color: var(--non-dark);
+  border: 1px solid var(--non-white);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--non-white);
+  border-color: var(--non-line);
+}
+.btn.ghost:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ----------------------------------------------------------------- cards */
+.card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--non-raise);
+  border: 1px solid var(--non-line-soft);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 0 0 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.12s ease;
+}
+button.card {
+  appearance: none;
+  color: inherit;
+  font: inherit;
+}
+.card:active {
+  transform: scale(0.99);
+}
+.card:hover {
+  border-color: var(--non-line);
+}
+.card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.card-chev {
+  color: var(--non-faint);
+  font-size: 20px;
+  flex: none;
+}
+
+/* progress dots / bars */
+.bar {
+  height: 4px;
+  width: 100%;
+  background: var(--non-line-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar > span {
+  display: block;
+  height: 100%;
+  background: var(--non-white);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--non-raise-2);
+  border: 1px solid var(--non-line-soft);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--non-dim);
+}
+.chip.done {
+  color: var(--ok);
+  border-color: rgba(143, 209, 158, 0.4);
+}
+
+/* a clearly-flagged draft marker for placeholder copy awaiting real content */
+.draft {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(226, 160, 160, 0.14);
+  border: 1px dashed rgba(226, 160, 160, 0.5);
+  color: var(--no);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* untranslated-language flag for stubbed locales */
+.translate-note {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: rgba(226, 160, 160, 0.08);
+  border: 1px dashed rgba(226, 160, 160, 0.4);
+  color: var(--no);
+  font-size: 13px;
+}
+
+.stack > * + * {
+  margin-top: 14px;
+}
+.muted {
+  color: var(--non-dim);
+}
+.center {
+  text-align: center;
+}
+.divider {
+  height: 1px;
+  background: var(--non-line-soft);
+  margin: 22px 0;
+}
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
