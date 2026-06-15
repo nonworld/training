@@ -5,6 +5,9 @@
 #   wrangler kv namespace create NON_ACADEMY_PROGRESS
 # then uncomment the binding below and redeploy.
 name = "non-academy"
+# NON World account: 701d3513ccebc11ce8a329597b567059
+# Pages config does not accept account_id here; pass it via the
+# CLOUDFLARE_ACCOUNT_ID env var when deploying (see npm run deploy).
 pages_build_output_dir = "dist"
 compatibility_date = "2024-11-01"
 

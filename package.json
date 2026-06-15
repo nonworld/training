@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=non-academy --branch=main"
+    "deploy": "npm run build && CLOUDFLARE_ACCOUNT_ID=701d3513ccebc11ce8a329597b567059 wrangler pages deploy dist --project-name=non-academy --branch=main"
   },
   "dependencies": {
     "i18next": "^23.16.0",

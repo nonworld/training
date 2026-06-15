@@ -17,6 +17,9 @@ npm run build    # outputs dist/
 npm run deploy   # builds and deploys to Cloudflare Pages (project: non-academy)
 ```
 
+**Live:** https://non-academy.pages.dev (Cloudflare Pages, NON World account,
+direct upload). `npm run deploy` rebuilds and ships to the `main` branch.
+
 ## What's built (reference standard)
 
 - Role selector (Venue / Rep) routing to the right track over a shared core.
