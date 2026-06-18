@@ -2,7 +2,8 @@
 // gallery-not-carnival: white and off-whites with a single warm accent. Returns
 // a stop() function. Respects prefers-reduced-motion by falling back to a brief,
 // still shimmer instead of motion.
-const COLOURS = ['#ffffff', '#f2efe9', '#d8d2c6', '#b9a07a']
+// Dark and warm tones so the confetti reads on the light celebration ground.
+const COLOURS = ['#0b0b0b', '#4a4a4a', '#b9a07a', '#8a6d3b']
 
 export function burst(canvas, { count = 140, duration = 2600 } = {}) {
   const ctx = canvas.getContext('2d')

@@ -36,7 +36,7 @@ export default function Reference() {
       <TranslateBanner />
 
       {!certified && (
-        <div className="translate-note" style={{ borderColor: 'rgba(255,255,255,0.18)', color: 'var(--non-dim)', background: 'var(--non-raise)' }}>
+        <div className="translate-note" style={{ borderColor: 'var(--non-line)', color: 'var(--non-dim)', background: 'var(--non-raise)' }}>
           {t('reference.lockedBody')}
         </div>
       )}

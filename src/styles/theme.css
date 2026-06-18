@@ -10,18 +10,24 @@
  * ============================================================================= */
 
 :root {
-  --non-dark: #0b0b0b;
-  --non-raise: #141414; /* raised surface: cards, sheets */
-  --non-raise-2: #1c1c1c; /* second raise: inputs, chips */
-  --non-white: #ffffff;
-  --non-dim: rgba(255, 255, 255, 0.7); /* body-secondary, AA on near-black */
-  --non-faint: rgba(255, 255, 255, 0.56); /* small labels, AA on near-black */
-  --non-line: rgba(255, 255, 255, 0.18);
-  --non-line-soft: rgba(255, 255, 255, 0.1);
-  --non-panel: rgba(11, 11, 11, 0.82);
+  /* Light theme, chosen for reading legibility. The brand's white-on-near-black
+   * lockup is preserved deliberately in the two "moment" surfaces: the shareable
+   * certificate card stays dark (see lib/certcard.js). Tokens keep their --non-*
+   * names but now resolve to light values: --non-dark is the page background,
+   * --non-white is the foreground (text). */
+  --non-dark: #ffffff; /* page background */
+  --non-raise: #f5f3ef; /* raised surface: cards, sheets (warm off-white) */
+  --non-raise-2: #ebe8e2; /* second raise: inputs, chips */
+  --non-white: #0b0b0b; /* foreground / text / wordmark */
+  --non-strong: rgba(0, 0, 0, 0.9); /* primary reading text */
+  --non-dim: rgba(0, 0, 0, 0.66); /* body-secondary, AA on white */
+  --non-faint: rgba(0, 0, 0, 0.56); /* small labels, AA on white */
+  --non-line: rgba(0, 0, 0, 0.16);
+  --non-line-soft: rgba(0, 0, 0, 0.08);
+  --non-panel: rgba(255, 255, 255, 0.85);
 
-  --ok: #8fd19e;
-  --no: #e2a0a0;
+  --ok: #2e7d4f; /* AA-contrast green on white */
+  --no: #b3261e; /* AA-contrast red on white */
 
   --tap: 56px; /* minimum one-handed tap target */
   --shell-max: 720px; /* readable column even on a laptop */
@@ -203,7 +209,7 @@ p {
   border-color: var(--non-line);
 }
 .btn.ghost:active {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* ----------------------------------------------------------------- cards */
