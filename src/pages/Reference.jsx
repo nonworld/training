@@ -50,6 +50,10 @@ export default function Reference() {
             </div>
             <h2 className="sku-name">{s.name}</h2>
 
+            {s.serviceSituation && (
+              <p className="sku-situation">{s.serviceSituation}</p>
+            )}
+
             <Field label={t('reference.tasting')} draft={s.draft}>
               {s.tasting}
             </Field>

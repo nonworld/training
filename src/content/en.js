@@ -19,6 +19,10 @@
 // ----------------------------------------------------------------- the six SKUs
 // `code` (NON1…) never translates. `name`, the flavour descriptor, MAY be
 // localised per market. still/sparkling is fact, not draft.
+// Each SKU carries a scenario-first frame: `scenario` is the guest moment or
+// dish you lead with, and the tasting note is revealed as the answer.
+// `serviceSituation` anchors when to reach for it. These read as the active-
+// recall prompts in flashcard mode.
 export const skus = [
   {
     id: 'NON1',
@@ -27,6 +31,8 @@ export const skus = [
     format: 'Sparkling',
     still: false,
     draft: true,
+    scenario: 'A guest sits down, is not drinking, and wants something to open the evening with.',
+    serviceSituation: 'The aperitif. The easy, confident first pour.',
     tasting:
       'Raspberry led, with a saline edge that keeps it dry. Chamomile softens the finish. Bright, not sweet.',
     glassware: 'White wine stem',
@@ -40,6 +46,8 @@ export const skus = [
     format: 'Sparkling',
     still: false,
     draft: true,
+    scenario: 'A guest orders the roast chicken or a mushroom dish and wants something savoury, not sweet.',
+    serviceSituation: 'The savoury pour. Reach for it with umami and white meat.',
     tasting:
       'Roasted pear and a deep umami base from kombu. Savoury and rounded, with a long, dry finish.',
     glassware: 'White wine stem',
@@ -53,6 +61,8 @@ export const skus = [
     format: 'Still',
     still: true,
     draft: true,
+    scenario: 'A guest is eating duck or a spiced autumn plate and wants a still drink with grip.',
+    serviceSituation: 'The still bridge between spice and citrus. Lightly chilled, red wine stem.',
     tasting:
       'Warm toasted spice lifted by sharp yuzu citrus. Still, textural, with grip on the finish.',
     glassware: 'Red wine stem',
@@ -66,6 +76,8 @@ export const skus = [
     format: 'Sparkling',
     still: false,
     draft: true,
+    scenario: 'A guest starts on oysters or fried, salty food and wants something to cut through it.',
+    serviceSituation: 'The sharpest pour. Built for shellfish, brine and fat.',
     tasting:
       'Bitter lemon marmalade over floral hibiscus. Tart and aromatic, with a clean, bracing finish.',
     glassware: 'White wine stem',
@@ -79,6 +91,8 @@ export const skus = [
     format: 'Sparkling',
     still: false,
     draft: true,
+    scenario: 'A guest is not drinking but wants something that drinks like a red alongside charcuterie.',
+    serviceSituation: 'The boldest sparkling. Reach for it when they ask for something like a red.',
     tasting:
       'Dark stewed cherry with a roasted coffee backbone. The most red-wine-like of the sparkling range. Dry and structured.',
     glassware: 'Red wine stem',
@@ -92,6 +106,8 @@ export const skus = [
     format: 'Still',
     still: true,
     draft: true,
+    scenario: 'A committed red drinker is finishing on lamb and is not drinking tonight.',
+    serviceSituation: 'The pour for the red drinker. Full bodied, tannic, cellar temperature.',
     tasting:
       'Ripe blackberry and plum carried on soft oak. Still, full bodied, with tannic structure that reads like a red.',
     glassware: 'Red wine stem',
@@ -1391,6 +1407,33 @@ const productMastery = {
     'Match each SKU to at least one dish or course.',
     'Explain why NON is poured in stemware and listed beside the wine, not the soft drinks.',
   ],
+  // Optional pre-check. Confident staff can prove they already know the basics
+  // and skip ahead; everyone else sees why the module is worth their time.
+  preCheck: {
+    id: 'precheck-product-mastery',
+    passToSkip: 100,
+    questions: [
+      {
+        id: 'p1',
+        prompt: 'How many SKUs does NON make, and how do they split?',
+        options: ['Six: four sparkling, two still', 'Nine, all sparkling', 'Six, all still', 'Four sparkling only'],
+        answer: 0,
+        explanation: 'Six SKUs: four sparkling, two still.',
+      },
+      {
+        id: 'p2',
+        prompt: 'Which is the right way to place NON on a venue list?',
+        options: [
+          'In the soft drinks section',
+          'Beside the wine, by the glass, in stemware',
+          'On a separate novelty page',
+          'It does not go on the list',
+        ],
+        answer: 1,
+        explanation: 'NON trades up. It belongs beside the wine, in stemware.',
+      },
+    ],
+  },
   segments: [
     {
       id: 'the-six',

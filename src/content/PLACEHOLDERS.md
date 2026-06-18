@@ -41,6 +41,28 @@ quiz). The copy is drafted in the NON voice for your review:
 - **Venue > Serve Ritual** and the SKU cards — confirm the glassware standard
   and exact serve temperatures per SKU.
 
+## Completion incentive (needs your decision)
+
+- The certification page shows a **"Your reward"** block with a `Set reward`
+  DRAFT badge. Set the real reward in `src/i18n/locales/en.js` under
+  `cert.rewardBody` (e.g. prize-draw entry, physical certificate, early SKU
+  access). The data + trigger are built; only the reward text is a placeholder.
+
+## Gamification values (confirm or adjust)
+
+- XP per action and level thresholds/names live in `src/state/gamification.js`
+  (`XP`, `LEVELS`). Levels are named Taster, Apprentice, Pourer, Server,
+  Specialist, Sommelier, Master. Adjust freely.
+
+## Email / transactional service (assumed)
+
+- Assumed **Cloudflare Email Service** (Email Sending) for the certificate email,
+  to keep everything on the existing Cloudflare stack. Not yet wired (that is the
+  next phase). To enable when we build it you will need: a verified sender domain
+  in Cloudflare Email, the DNS records (SPF/DKIM/DMARC) it provides, and a KV or
+  D1 binding for the event funnel. Tell me if you would rather use Resend,
+  Postmark or SendGrid instead.
+
 ## Certification copy
 
 - Two final role exams (6 questions each) plus per-module quizzes. Pass threshold

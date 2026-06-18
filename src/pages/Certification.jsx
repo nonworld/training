@@ -1,13 +1,16 @@
-// Certification. Every module in the track must be complete, then the guest
-// sits the final role-specific exam. Passing earns the badge (NON Certified
-// Sommelier / NON Rep Accreditation) and unlocks the on-shift quick reference.
+// Certification. Every module in the track must be complete, then the final
+// role exam. Passing earns the badge (NON Certified Sommelier / NON Rep
+// Accreditation), awards XP, celebrates, and reveals the shareable card, which
+// also unlocks the on-shift quick reference.
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import QuizRunner from '../components/QuizRunner.jsx'
+import CertCard from '../components/CertCard.jsx'
 import TranslateBanner from '../components/TranslateBanner.jsx'
 import { useStore } from '../state/store.jsx'
+import { XP, levelInfo } from '../state/gamification.js'
 import { getCertification, getModule } from '../content/registry.js'
 
 export default function Certification() {
@@ -28,21 +31,31 @@ export default function Certification() {
   if (examMode && !earned) {
     const onScore = (score, passed) => {
       recordQuiz(cert.exam.id, score, cert.exam.threshold)
-      if (passed) earnCertification(role)
+      if (passed) {
+        const beforeLevel = levelInfo(state.xp).level
+        const after = levelInfo(state.xp + XP.CERT)
+        earnCertification(role, { id: `cert-${role}` })
+        navigate('/celebrate', {
+          state: {
+            kind: 'cert',
+            title: cert.title,
+            badgeTitle: cert.title,
+            xpGained: XP.CERT,
+            leveledUp: after.level > beforeLevel,
+            levelName: after.name,
+          },
+          replace: true,
+        })
+      }
     }
-    const actions = ({ passed }, retake) =>
-      passed ? (
-        <button className="btn" onClick={() => setExamMode(false)}>
-          {t('cert.unlocked')}
+    const actions = (_r, retake) => (
+      <>
+        <button className="btn" onClick={retake}>{t('cert.retakeExam')}</button>
+        <button className="btn ghost" onClick={() => setExamMode(false)}>
+          {t('quiz.backToModule')}
         </button>
-      ) : (
-        <>
-          <button className="btn" onClick={retake}>{t('cert.retakeExam')}</button>
-          <button className="btn ghost" onClick={() => setExamMode(false)}>
-            {t('quiz.backToModule')}
-          </button>
-        </>
-      )
+      </>
+    )
     return (
       <>
         <p className="eyebrow">{cert.title} · {t('cert.examTitle')}</p>
@@ -51,6 +64,32 @@ export default function Certification() {
     )
   }
 
+  // Earned: badge + shareable card + quick reference.
+  if (earned) {
+    return (
+      <>
+        <p className="eyebrow">{t('home.certification')}</p>
+        <h1>{cert.title}</h1>
+        <p className="lede">{t('cert.earnedLede')}</p>
+
+        <CertCard badgeTitle={cert.title} date={record?.date} />
+
+        <div className="incentive">
+          <p className="eyebrow" style={{ margin: '0 0 6px' }}>{t('cert.rewardTitle')}</p>
+          {/* PLACEHOLDER incentive: set the real reward in content (see PLACEHOLDERS.md). */}
+          <p style={{ margin: 0 }}>
+            {t('cert.rewardBody')} <span className="draft">Set reward</span>
+          </p>
+        </div>
+
+        <button className="btn ghost" style={{ marginTop: 18 }} onClick={() => navigate('/reference')}>
+          {t('nav.reference')}
+        </button>
+      </>
+    )
+  }
+
+  // Not yet earned.
   return (
     <>
       <p className="eyebrow">{t('home.certification')}</p>
@@ -58,25 +97,17 @@ export default function Certification() {
       <p className="lede">{cert.intro}</p>
       <TranslateBanner />
 
-      <div className={`badge ${earned ? 'earned' : ''}`}>
+      <div className="badge">
         <div className="badge-mark">NON</div>
         <p className="badge-title">{cert.title}</p>
-        <p className="badge-state">
-          {earned ? t('cert.earnedOn', { date: record?.date }) : t('cert.locked')}
-        </p>
+        <p className="badge-state">{t('cert.locked')}</p>
       </div>
 
-      {earned ? (
-        <button className="btn" onClick={() => navigate('/reference')}>
-          {t('nav.reference')}
-        </button>
-      ) : requirementsMet ? (
+      {requirementsMet ? (
         <>
           <h2>{t('cert.readyTitle')}</h2>
           <p>{t('cert.readyBody')}</p>
-          <button className="btn" onClick={() => setExamMode(true)}>
-            {t('cert.startExam')}
-          </button>
+          <button className="btn" onClick={() => setExamMode(true)}>{t('cert.startExam')}</button>
         </>
       ) : (
         <>

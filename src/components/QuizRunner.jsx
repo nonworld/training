@@ -1,24 +1,39 @@
 // Reusable quiz engine, shared by per-module formative quizzes and the final
-// certification exam. One question at a time, immediate feedback, scored against
-// the quiz's pass threshold. The parent supplies the result-screen actions.
+// certification exam. One question at a time. A correct answer fires a fast
+// micro-celebration (tick + XP float) to keep the effort-reward loop tight. A
+// wrong answer teaches: it shows the explanation in NON's voice rather than just
+// marking it incorrect. Scored against the quiz's pass threshold.
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { XP } from '../state/gamification.js'
+import { playTick } from '../lib/sound.js'
+import { useStore } from '../state/store.jsx'
+
 export default function QuizRunner({ quiz, onScore, renderResultActions }) {
   const { t } = useTranslation()
+  const { state, awardQuizCorrect } = useStore()
   const [i, setI] = useState(0)
   const [picked, setPicked] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [correctCount, setCorrect] = useState(0)
   const [done, setDone] = useState(false)
   const [finalScore, setFinalScore] = useState(0)
+  const [gain, setGain] = useState(false)
 
   const questions = quiz.questions
   const q = questions[i]
+  const isRight = revealed && picked === q.answer
 
   const submit = () => {
     if (picked === null) return
-    if (picked === q.answer) setCorrect((c) => c + 1)
+    if (picked === q.answer) {
+      setCorrect((c) => c + 1)
+      awardQuizCorrect(quiz.id, q.id)
+      playTick(state.soundMuted)
+      setGain(true)
+      setTimeout(() => setGain(false), 900)
+    }
     setRevealed(true)
   }
 
@@ -53,7 +68,7 @@ export default function QuizRunner({ quiz, onScore, renderResultActions }) {
         <h1 style={{ marginTop: 18 }}>{passed ? t('quiz.pass') : t('quiz.fail')}</h1>
         <p>{t('quiz.passThreshold', { threshold: quiz.threshold })}</p>
         <div className="stack" style={{ marginTop: 18 }}>
-          {renderResultActions?.(score(finalScore, quiz.threshold), retake)}
+          {renderResultActions?.({ value: finalScore, passed }, retake)}
         </div>
       </div>
     )
@@ -83,9 +98,13 @@ export default function QuizRunner({ quiz, onScore, renderResultActions }) {
         })}
       </div>
 
+      {gain && (
+        <div className="xp-float" aria-hidden="true">+{XP.QUIZ_CORRECT} XP</div>
+      )}
+
       {revealed && (
-        <div className={`feedback ${picked === q.answer ? 'ok' : 'no'}`}>
-          <strong>{picked === q.answer ? t('quiz.correct') : t('quiz.incorrect')}</strong>
+        <div className={`feedback ${isRight ? 'ok' : 'no'}`}>
+          <strong>{isRight ? t('quiz.correct') : t('quiz.incorrect')}</strong>
           <p style={{ margin: '6px 0 0' }}>{q.explanation}</p>
         </div>
       )}
@@ -103,9 +122,4 @@ export default function QuizRunner({ quiz, onScore, renderResultActions }) {
       </div>
     </>
   )
-}
-
-// passed flag helper kept inline so the result render prop stays simple.
-function score(finalScore, threshold) {
-  return { value: finalScore, passed: finalScore >= threshold }
 }

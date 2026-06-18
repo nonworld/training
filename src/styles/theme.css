@@ -14,8 +14,8 @@
   --non-raise: #141414; /* raised surface: cards, sheets */
   --non-raise-2: #1c1c1c; /* second raise: inputs, chips */
   --non-white: #ffffff;
-  --non-dim: rgba(255, 255, 255, 0.62);
-  --non-faint: rgba(255, 255, 255, 0.38);
+  --non-dim: rgba(255, 255, 255, 0.7); /* body-secondary, AA on near-black */
+  --non-faint: rgba(255, 255, 255, 0.56); /* small labels, AA on near-black */
   --non-line: rgba(255, 255, 255, 0.18);
   --non-line-soft: rgba(255, 255, 255, 0.1);
   --non-panel: rgba(11, 11, 11, 0.82);
