@@ -717,3 +717,10 @@
   margin: 0 0 12px;
   font-style: italic;
 }
+
+/* Badge emoji inside the circular badge mark (celebration + certification). */
+.badge-glyph {
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: 0;
+}

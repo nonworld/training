@@ -22,6 +22,7 @@ export default function Celebrate() {
     <Celebration
       title={state.title}
       badgeTitle={state.badgeTitle}
+      badgeEmoji={state.badgeEmoji}
       xpGained={state.xpGained}
       leveledUp={state.leveledUp}
       levelName={state.levelName}

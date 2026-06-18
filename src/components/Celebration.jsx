@@ -12,6 +12,7 @@ import { useStore } from '../state/store.jsx'
 export default function Celebration({
   title,
   badgeTitle,
+  badgeEmoji = '🏅',
   xpGained = 0,
   levelName,
   leveledUp = false,
@@ -67,7 +68,9 @@ export default function Celebration({
         <h1 className="celebrate-title">{title}</h1>
 
         <div className={`celebrate-badge ${revealed ? 'in' : ''}`}>
-          <div className="badge-mark earned">NON</div>
+          <div className="badge-mark earned">
+            <span className="badge-glyph">{badgeEmoji}</span>
+          </div>
           <p className="celebrate-badge-title">{badgeTitle}</p>
         </div>
 
