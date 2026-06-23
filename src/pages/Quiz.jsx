@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next'
 
 import QuizRunner from '../components/QuizRunner.jsx'
 import { useStore } from '../state/store.jsx'
-import { badgeEmoji } from '../state/badges.js'
 import { getModule } from '../content/registry.js'
 
 export default function Quiz() {
@@ -32,7 +31,7 @@ export default function Quiz() {
           kind: 'module',
           title: mod.title,
           badgeTitle: mod.title,
-          badgeEmoji: badgeEmoji(mod.id),
+          badgeId: mod.id,
           xpGained: payload.xpGained,
           leveledUp: payload.leveledUp,
           levelName: payload.levelName,

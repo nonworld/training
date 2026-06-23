@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Logotype from './Logotype.jsx'
+import { BadgeGlyph } from '../state/badges.jsx'
 import { burst } from '../lib/confetti.js'
 import { playFanfare } from '../lib/sound.js'
 import { useStore } from '../state/store.jsx'
@@ -12,7 +13,7 @@ import { useStore } from '../state/store.jsx'
 export default function Celebration({
   title,
   badgeTitle,
-  badgeEmoji = '🏅',
+  badgeId,
   xpGained = 0,
   levelName,
   leveledUp = false,
@@ -69,7 +70,7 @@ export default function Celebration({
 
         <div className={`celebrate-badge ${revealed ? 'in' : ''}`}>
           <div className="badge-mark earned">
-            <span className="badge-glyph">{badgeEmoji}</span>
+            <BadgeGlyph id={badgeId} size={36} />
           </div>
           <p className="celebrate-badge-title">{badgeTitle}</p>
         </div>

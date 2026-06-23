@@ -190,9 +190,9 @@ const brandStory = {
   summary:
     'Why premium non-alcoholic exists, and the case for trading up rather than down. The story behind every pour.',
   objectives: [
-    'Explain in one sentence why NON exists and who it is for.',
-    'State the trade-up positioning without using mocktail language.',
-    'Describe the moment at the table that NON is made for.',
+    'Deliver a one-sentence answer to "what is NON?" in the NON voice.',
+    'Position NON as trading up, without mocktail or alternative language.',
+    'Name the moment at the table that NON is made for.',
   ],
   segments: [
     {
@@ -434,7 +434,7 @@ const repListPlacement = {
   summary: 'Win the listing and place NON beside the wine, not the soft drinks.',
   objectives: [
     'Deliver a 60-second venue pitch that lands the trade-up positioning.',
-    'State where NON belongs on a list and why.',
+    'Place NON beside the wine on a list and justify it.',
     'Use a pour, not a speech, to close.',
   ],
   segments: [
@@ -649,7 +649,7 @@ const repObjections = {
   title: 'Commercial Objection Handling',
   summary: 'Answer the three objections you will hear most: price, fridge space, and "we already have something".',
   objectives: [
-    'Respond to the price, range and incumbent objections with a confident, specific answer.',
+    'Handle the price, range and incumbent objections with a confident, specific answer.',
     'Reframe cost as margin per cover.',
   ],
   segments: [
@@ -1746,6 +1746,166 @@ const productPairing = {
 
 // Module order: shared core first (brand story, product mastery, category), then
 // the role tracks. getModulesForRole filters shared + the active role.
+// ----------------------------------------------------- worked examples
+// One annotated model performance per skill module, shown before the practical
+// and quiz so novices see the move modelled first. Attached to modules below.
+// product-pairing already carries its own inline worked example.
+const WORKED = {
+  'brand-story': {
+    label: 'A model answer at the table',
+    setup: 'A guest at a four-top asks, "So what actually is this NON thing?"',
+    model: [
+      '"It is a drink we make the way a winemaker makes wine. Real ingredients, proper structure, built to sit on the table with the wine, not instead of it. So whether or not you are drinking tonight, you get something considered."',
+    ],
+    callouts: [
+      'Leads with how it is made, not what it lacks.',
+      'Puts it on the table as an equal, naming the occasion.',
+      'Never says mocktail, alcohol-free, or alternative.',
+    ],
+  },
+  'rep-list-placement': {
+    label: 'A model 60-second pitch',
+    setup: 'You have one minute with a buyer who is busy and a little sceptical.',
+    model: [
+      '"Every service you have guests who are not drinking. Right now they get tap water or a soft drink, and you earn nothing from them. NON is six drinks built like wine, poured by the glass beside your wines. Let me pour you one. If you list two to start, you turn those guests into covers."',
+    ],
+    callouts: [
+      'Opens on the buyer\'s gap, not the brand.',
+      'Names the commercial upside: covers, not cost.',
+      'Closes with a pour and a small, specific ask.',
+    ],
+  },
+  'rep-reading-program': {
+    label: 'A model list read',
+    setup: 'You are handed a wine-led list with one tired soft-drink line at the bottom.',
+    model: [
+      '"Strong by-the-glass wines, but the only thing here for a non-drinker is a cola. That is the gap. For this seafood-led room I would lead with NON1 and NON5 by the glass: both bright, both cut through the raw bar, both sit naturally next to your whites."',
+    ],
+    callouts: [
+      'Names the gap in one plain sentence.',
+      'Matches the recommendation to the food the venue serves.',
+      'Brings two specific SKUs, not the whole range.',
+    ],
+  },
+  'rep-objections': {
+    label: 'A model objection turn',
+    setup: 'Buyer: "It is too expensive for a soft drink."',
+    model: [
+      '"It is not priced as a soft drink, it is priced as wine, because it is made like wine and earns a wine-like margin. A non-drinker on tap water earns you nothing. The same guest on a glass of NON earns you real margin per cover. Start with two by the glass and watch what they return."',
+    ],
+    callouts: [
+      'Reframes from cost to margin per cover.',
+      'Does not discount; holds the position.',
+      'Lowers the risk with a small first step.',
+    ],
+  },
+  'rep-distributor': {
+    label: 'A model reorder call',
+    setup: 'You are checking in with an account two weeks after the listing went live.',
+    model: [
+      '"Your NON1 is moving fastest, so let us top that up before you run dry. I will add a case of NON5 to widen the by-the-glass offer, and drop in NON7 to trial with your red drinkers. Same easy reorder, I will handle it."',
+    ],
+    callouts: [
+      'Leads with the mover, protects the hero SKU.',
+      'Uses what is selling to widen the range.',
+      'Makes reordering effortless for the buyer.',
+    ],
+  },
+  'rep-account-planning': {
+    label: 'A model account plan',
+    setup: 'A 120-cover bistro, wine-led, owner makes the call.',
+    model: [
+      '"Goal: two NON by the glass listed within a month, reordering monthly. Visit one, pour NON1 and NON7 for the owner and land the trade-up. Visit two, confirm the listing and set the reorder. Then review what sold and add a third SKU."',
+    ],
+    callouts: [
+      'One specific, measurable goal per account.',
+      'A clear sequence: pour, list, reorder, review.',
+      'Built on a real read of the venue.',
+    ],
+  },
+  'venue-recommending': {
+    label: 'A model recommendation',
+    setup: 'A guest orders the snapper and waves away the wine list.',
+    model: [
+      '"Can I pour you the NON5 with that? Bitter lemon and hibiscus, finishes dry, it cuts through the fish beautifully. I will bring it in a wine glass."',
+    ],
+    callouts: [
+      'Names a specific SKU, not "we have some options".',
+      'Gives the reason in one line, tied to the dish.',
+      'Pours it in stemware, like wine.',
+    ],
+  },
+  'venue-trade-up': {
+    label: 'A model trade-up',
+    setup: 'A guest asks for "just a soda water".',
+    model: [
+      '"I can do that, or I can pour you a NON1 instead. Raspberry and chamomile, finishes dry, it drinks like a proper glass. No pressure, just a better option if you fancy it."',
+    ],
+    callouts: [
+      'Offers the trade up plainly, alongside the default.',
+      'One line of why, warm and confident.',
+      'No pressure if they say no.',
+    ],
+  },
+  'venue-serve-ritual': {
+    label: 'A model serve',
+    setup: 'A guest is on the still NON9 with their main.',
+    model: [
+      'Present the bottle as you would a red. Pour at the table into a red wine stem, served at cellar temperature. "NON9, oaked blackberry and plum, full bodied, it will stand up to the lamb."',
+    ],
+    callouts: [
+      'Right glass: red wine stem for the still SKUs.',
+      'Right temperature: cellar, not over-chilled.',
+      'The ritual is the same as wine. That is the point.',
+    ],
+  },
+  'venue-pairing-menu': {
+    label: 'A model menu pairing',
+    setup: 'A non-drinking guest takes the three-course set menu.',
+    model: [
+      '"Oysters to start, so NON5, the acid cuts the brine. The mushroom risotto next, NON2, savoury meets savoury. And the chocolate tart to finish, NON7, dark fruit and coffee echo the cocoa."',
+    ],
+    callouts: [
+      'Weight to weight across the whole menu.',
+      'A reason for each pour, in a line.',
+      'A full pairing flight through NON alone.',
+    ],
+  },
+  'venue-sceptical-guest': {
+    label: 'A model turn of a sceptic',
+    setup: 'Guest: "I do not usually like those."',
+    model: [
+      '"Fair enough, most of them are sugar. This one is different. Let me pour you a small taste of NON7, it is dry and structured, more like a red. No pressure, just try it."',
+    ],
+    callouts: [
+      'Acknowledges the doubt instead of arguing.',
+      'Offers a taste, not a speech.',
+      'Describes structure and dryness, lets it land.',
+    ],
+  },
+}
+
+// A short manager-discussion prompt shown at the end of each module for
+// distributor-team rollout. Keep it to one practical conversation.
+const MANAGER_PROMPT = {
+  'brand-story': 'Agree on the one-line answer your team gives when a guest asks what NON is.',
+  'product-foundation': 'Quiz each other on the six SKUs until everyone can name them cold.',
+  'product-pairing': 'Pick three dishes from your menu and agree the pour for each.',
+  'category-context': 'Name the guest occasions in your venue where NON should be offered first.',
+  'rep-list-placement': 'Run your 60-second pitch past your manager and tighten it.',
+  'rep-reading-program': 'Review a real account list together and agree the placement.',
+  'rep-objections': 'Role-play the three objections, one playing the buyer.',
+  'rep-distributor': 'Agree which accounts are due a reorder check-in this week.',
+  'rep-account-planning': 'Walk your manager through one target account plan.',
+  'venue-recommending': 'Agree a recommendation for each section of tonight\'s menu.',
+  'venue-trade-up': 'Practise the trade-up line until it feels natural for the floor.',
+  'venue-serve-ritual': 'Check glassware and serve temperatures are set for service.',
+  'venue-pairing-menu': 'Pair four SKUs across your current menu as a team.',
+  'venue-sceptical-guest': 'Role-play the sceptical guest and agree the house response.',
+}
+
+// Attach worked examples and manager prompts without editing each module object.
+// An inline workedExample on a module wins over the map.
 export const modules = [
   brandStory,
   productFoundation,
@@ -1763,7 +1923,11 @@ export const modules = [
   venueServeRitual,
   venuePairingMenu,
   venueScepticalGuest,
-]
+].map((m) => ({
+  ...m,
+  workedExample: m.workedExample || WORKED[m.id] || null,
+  managerPrompt: m.managerPrompt || MANAGER_PROMPT[m.id] || null,
+}))
 
 // ----------------------------------------------------------- certifications
 // Final, role-specific exam after every module in the track is complete.

@@ -107,6 +107,16 @@ export default function Home() {
           <span className="card-chev">›</span>
         </div>
       </button>
+
+      <button className="card" onClick={() => navigate('/team')}>
+        <div className="card-row">
+          <div>
+            <p className="eyebrow" style={{ margin: '0 0 6px' }}>{t('team.title')}</p>
+            <h3 style={{ margin: 0 }}>{t('team.card')}</h3>
+          </div>
+          <span className="card-chev">›</span>
+        </div>
+      </button>
     </>
   )
 }

@@ -4,6 +4,26 @@ Everything below is **draft copy written in the NON voice**, not approved fact.
 Each item renders with a visible `DRAFT` badge in the app. Replace the values in
 `src/content/en.js`, then remove `draft: true` from each SKU once signed off.
 
+## Certification performance tasks (highest priority to confirm)
+
+- **Venue exam, menu pairing task** (`certifications.venue.exam.questions[0].menu`):
+  the three dishes and the `accept` (sound SKUs) per course are my drafts. Confirm
+  or supply your own unseen menu; new menu is a content edit only.
+- **Rep exam, beverage-list task** (`certifications.rep.exam.questions[0]`): the
+  sample list, the gap answer, and the `accept` SKUs are drafts. Confirm or supply
+  a real list.
+
+## Worked examples (model performances)
+
+- Every skill module now has a `workedExample` (a model pitch / recommendation /
+  objection turn). These are drafts in the NON voice — review the wording.
+
+## Other flagged placeholders
+
+- Certification reward (`cert.rewardBody`) — set the real incentive.
+- Team-wide completion needs the backend (KV/D1) — flagged `BACKEND` in the Team
+  view; only the learner's own completion is real for now.
+
 ## SKU product specifics (all six are draft)
 
 For each SKU the following four fields are draft and need confirming:

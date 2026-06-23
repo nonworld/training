@@ -18,8 +18,17 @@ export default function Module() {
   const { moduleId } = useParams()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { state, isSegmentDone, quiz, recordPreCheck, markRecallDone, isRecallDone, hasFlashcardRound } =
-    useStore()
+  const {
+    state,
+    isSegmentDone,
+    quiz,
+    recordPreCheck,
+    markRecallDone,
+    isRecallDone,
+    hasFlashcardRound,
+    practical,
+    setPractical,
+  } = useStore()
   const [precheck, setPrecheck] = useState(false)
   const [recall, setRecall] = useState(false)
 
@@ -169,14 +178,54 @@ export default function Module() {
       <h2>{mod.practical.title}</h2>
       <p>{mod.practical.body}</p>
 
+      {/* Practical-task evidence: self-attestation + optional manager sign-off. */}
+      {(() => {
+        const prac = practical(mod.id) || {}
+        return (
+          <div className="evidence">
+            <label className="attest">
+              <input
+                type="checkbox"
+                checked={Boolean(prac.attested)}
+                onChange={(e) => setPractical(mod.id, { attested: e.target.checked })}
+              />
+              <span>{t('module.attest')}</span>
+            </label>
+            <p className="evidence-note">{t('module.signOffNote')}</p>
+            <div className="evidence-row">
+              <input
+                className="field"
+                placeholder={t('module.signOffName')}
+                value={prac.signOffName || ''}
+                onChange={(e) => setPractical(mod.id, { signOffName: e.target.value })}
+                maxLength={60}
+              />
+              <input
+                className="field"
+                type="date"
+                value={prac.signOffDate || ''}
+                onChange={(e) => setPractical(mod.id, { signOffDate: e.target.value })}
+              />
+            </div>
+          </div>
+        )
+      })()}
+
       <button
         className="btn"
-        style={{ marginTop: 12 }}
+        style={{ marginTop: 16 }}
         disabled={quizLocked}
         onClick={() => navigate(`/quiz/${mod.id}`)}
       >
         {quizLocked ? t('module.flashFirst') : q?.passed ? `✓ ${t('module.quizCta')}` : t('module.quizCta')}
       </button>
+
+      {mod.managerPrompt && (
+        <div className="manager-prompt">
+          <p className="eyebrow" style={{ margin: '0 0 6px' }}>{t('module.discuss')}</p>
+          <p style={{ margin: 0 }}>{mod.managerPrompt}</p>
+        </div>
+      )}
     </>
   )
 }

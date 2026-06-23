@@ -83,6 +83,10 @@ export default {
     required: 'Required',
     flashRound: 'Run a flashcard round',
     flashFirst: 'Complete the flashcard round first',
+    attest: 'I have done this practical task',
+    signOffNote: 'Optional: a manager or trainer can sign off.',
+    signOffName: 'Manager or trainer name',
+    discuss: 'Discuss with your manager',
   },
   quiz: {
     title: 'Knowledge check',
@@ -117,6 +121,16 @@ export default {
     continue: 'Continue',
     viewCard: 'Get your card',
     levelUp: 'New level reached: {{level}}',
+  },
+  team: {
+    title: 'Team',
+    card: 'Your venue or distributor',
+    noTeam: 'Your team',
+    intro: 'Track your progress against your venue or distributor.',
+    yourCompletion: 'Your completion',
+    modulesDone: '{{done}} of {{total}} modules complete',
+    teamTotal: 'Team total',
+    teamTotalPending: 'Team-wide completion appears once your venue is connected.',
   },
   reference: {
     title: 'Quick reference',

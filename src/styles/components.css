@@ -840,3 +840,71 @@
 .card-required {
   border-color: var(--non-accent);
 }
+
+/* =============================================================================
+ * Practical-task evidence, manager prompt, team layer
+ * ============================================================================= */
+.evidence {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--non-line-soft);
+  border-radius: var(--radius);
+  background: var(--non-raise);
+}
+.attest {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 32px;
+}
+.attest input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--non-accent);
+  flex: none;
+}
+.evidence-note {
+  margin: 12px 0 8px;
+  font-size: 13px;
+  color: var(--non-dim);
+}
+.evidence-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.evidence-row .field {
+  flex: 1;
+  min-width: 140px;
+}
+
+.manager-prompt {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid var(--non-line-soft);
+  border-left: 3px solid var(--non-accent);
+  border-radius: var(--radius);
+  background: var(--non-raise);
+}
+
+.team-stat {
+  margin-top: 8px;
+  padding: 22px;
+  border: 1px solid var(--non-line-soft);
+  border-radius: var(--radius-lg);
+  background: var(--non-raise);
+}
+.team-stat-num {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+}
+.team-stat-label {
+  margin-top: 6px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--non-dim);
+}

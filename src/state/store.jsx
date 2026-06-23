@@ -29,6 +29,7 @@ const EMPTY = {
   flashcards: {}, // { [cardId]: { box, lastSeen } } — simple spaced repetition
   recallDone: {}, // { [moduleId]: true } — spaced recall opener completed
   flashcardRounds: {}, // { [moduleId]: true } — a full flashcard round completed
+  practicals: {}, // { [moduleId]: { attested, signOffName, signOffDate } }
   soundMuted: false,
 
   // data capture (populated later, at first point of real value)
@@ -147,6 +148,22 @@ export function StoreProvider({ children }) {
         })),
       hasFlashcardRound: (moduleId) =>
         Boolean(state.flashcardRounds[moduleId] || state.flashcardRounds.global),
+
+      // Practical-task evidence: a self-attestation plus an optional manager or
+      // trainer sign-off (name + date). Stored against the learner and logged as
+      // an event alongside quiz scores for distributor reporting.
+      setPractical: (moduleId, data) =>
+        setState((s) => {
+          const prev = s.practicals[moduleId] || {}
+          const merged = { ...prev, ...data }
+          const next = { ...s, practicals: { ...s.practicals, [moduleId]: merged } }
+          // log only on the transition to attested
+          if (data.attested && !prev.attested) {
+            return logEvent(next, 'practical_done', { moduleId })
+          }
+          return next
+        }),
+      practical: (moduleId) => state.practicals[moduleId] || null,
 
       // ---- flashcards (simple Leitner-style spaced repetition) ----
       gradeFlashcard: (cardId, got) =>

@@ -11,7 +11,7 @@ import CertCard from '../components/CertCard.jsx'
 import TranslateBanner from '../components/TranslateBanner.jsx'
 import { useStore } from '../state/store.jsx'
 import { XP, levelInfo } from '../state/gamification.js'
-import { badgeEmoji } from '../state/badges.js'
+import { BadgeGlyph } from '../state/badges.jsx'
 import { getCertification, getModule } from '../content/registry.js'
 
 export default function Certification() {
@@ -24,7 +24,7 @@ export default function Certification() {
 
   const role = state.role
   const cert = getCertification(state.lang, role)
-  const certEmoji = badgeEmoji(`cert-${role}`)
+  const certBadgeId = `cert-${role}`
   const earned = hasCertification(role)
   const record = state.certs[role]
   const requirementsMet = cert.requires.every((id) => isModuleComplete(id))
@@ -42,7 +42,7 @@ export default function Certification() {
             kind: 'cert',
             title: cert.title,
             badgeTitle: cert.title,
-            badgeEmoji: certEmoji,
+            badgeId: certBadgeId,
             xpGained: XP.CERT,
             leveledUp: after.level > beforeLevel,
             levelName: after.name,
@@ -101,7 +101,7 @@ export default function Certification() {
       <TranslateBanner />
 
       <div className="badge">
-        <div className="badge-mark"><span className="badge-glyph">{certEmoji}</span></div>
+        <div className="badge-mark"><BadgeGlyph id={certBadgeId} size={36} /></div>
         <p className="badge-title">{cert.title}</p>
         <p className="badge-state">{t('cert.locked')}</p>
       </div>
