@@ -11,6 +11,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import QuizRunner from '../components/QuizRunner.jsx'
+import SkuLineup from '../components/SkuLineup.jsx'
 import { useStore } from '../state/store.jsx'
 import { getModule, getSkuRecall } from '../content/registry.js'
 
@@ -85,6 +86,8 @@ export default function Module() {
       <p className="eyebrow">{mod.eyebrow}</p>
       <h1>{mod.title}</h1>
       <p className="lede">{mod.summary}</p>
+
+      {mod.gallery && <SkuLineup ids={mod.gallery} />}
 
       {recallNeeded && (
         <button className="precheck-cta" onClick={() => setRecall(true)}>

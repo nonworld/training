@@ -1160,6 +1160,7 @@ const venueServeRitual = {
   segments: [
     {
       id: 'glassware',
+      diagram: 'serve',
       title: 'Glassware',
       minutes: 5,
       body: [
@@ -1479,6 +1480,7 @@ const productFoundation = {
     'Explain why NON is poured in stemware and listed beside the wine.',
   ],
   requireFlashcards: true,
+  gallery: ['NON1', 'NON2', 'NON3', 'NON5', 'NON7', 'NON9'],
   preCheck: {
     id: 'precheck-product-foundation',
     passToSkip: 100,
@@ -1507,6 +1509,7 @@ const productFoundation = {
   segments: [
     {
       id: 'the-six',
+      gallery: ['NON1', 'NON2', 'NON3', 'NON5', 'NON7', 'NON9'],
       title: 'The six, at a glance',
       minutes: 5,
       body: [
@@ -1537,6 +1540,7 @@ const productFoundation = {
     },
     {
       id: 'sparkling',
+      gallery: ['NON1', 'NON2', 'NON5', 'NON7'],
       title: 'The sparkling four',
       minutes: 5,
       body: [
@@ -1553,6 +1557,7 @@ const productFoundation = {
     },
     {
       id: 'still',
+      gallery: ['NON3', 'NON9'],
       title: 'The still two',
       minutes: 5,
       body: [
@@ -1651,6 +1656,7 @@ const productPairing = {
   segments: [
     {
       id: 'pairing-principles',
+      diagram: 'pairing',
       title: 'The three principles',
       minutes: 5,
       body: [

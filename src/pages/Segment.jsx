@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next'
 
 import { useStore } from '../state/store.jsx'
 import { getModule } from '../content/registry.js'
+import SkuLineup from '../components/SkuLineup.jsx'
+import ServeDiagram from '../components/ServeDiagram.jsx'
+import PairingSpectrum from '../components/PairingSpectrum.jsx'
 
 export default function Segment() {
   const { moduleId, segmentId } = useParams()
@@ -46,6 +49,10 @@ export default function Segment() {
       </div>
 
       <h1 style={{ marginTop: 18 }}>{seg.title}</h1>
+
+      {seg.gallery && <SkuLineup ids={seg.gallery} />}
+      {seg.diagram === 'serve' && <ServeDiagram />}
+      {seg.diagram === 'pairing' && <PairingSpectrum />}
 
       <div className="prose">
         {seg.body.map((p, i) => (

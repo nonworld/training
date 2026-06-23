@@ -141,6 +141,13 @@ export default {
     cta: 'Claim my certificate',
     privacy: 'We use your email to send your certificate and track your progress. Your manager sees only your venue team.',
   },
+  diagram: {
+    glass: 'Wine glass',
+    chilled: 'Serve chilled',
+    pour: 'Pour to a third',
+    light: 'Light and bright',
+    structured: 'Full and structured',
+  },
   team: {
     title: 'Team',
     card: 'Your venue',
