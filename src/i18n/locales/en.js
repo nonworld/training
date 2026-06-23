@@ -32,6 +32,7 @@ export default {
       'Recommend the right SKU for any dish',
       'Run the pour, temperature and glassware ritual',
       'Turn a sceptical guest into a sale',
+      'Make more in tips with confident service',
       'Win rewards as you complete',
     ],
     shared: 'Shared core for both roles',
