@@ -56,6 +56,7 @@ export default function SignupForm({ onDone }) {
           onChange={(e) => setEmail(e.target.value)}
           maxLength={120}
         />
+        <p className="evidence-note" style={{ margin: '2px 0 0' }}>{t('signup.emailHint')}</p>
         {touched && !emailOk && <p className="field-error">{t('signup.emailError')}</p>}
 
         <label className="field-label" htmlFor="su-venue">{t('signup.venue')}</label>

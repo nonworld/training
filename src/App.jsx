@@ -10,6 +10,7 @@ import Flashcards from './pages/Flashcards.jsx'
 import Reference from './pages/Reference.jsx'
 import Certification from './pages/Certification.jsx'
 import Team from './pages/Team.jsx'
+import Admin from './pages/Admin.jsx'
 import Celebrate from './pages/Celebrate.jsx'
 
 // RoleSelect (onboarding) and Celebrate are full-screen. Everything else lives
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<RoleSelect />} />
+      <Route path="/admin" element={<Admin />} />
       <Route path="/celebrate" element={<Celebrate />} />
       <Route path="/home" element={withShell(<Home />)} />
       <Route path="/learn/:moduleId" element={withShell(<Module />)} />

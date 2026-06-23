@@ -937,3 +937,27 @@
   color: var(--no);
   font-size: 13px;
 }
+
+/* Admin report table (internal). */
+.report {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.report th,
+.report td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--non-line-soft);
+}
+.report th {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--non-faint);
+  font-weight: 700;
+}
+.report .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

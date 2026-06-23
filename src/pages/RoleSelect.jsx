@@ -14,7 +14,18 @@ export default function RoleSelect() {
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   const { state, setRole, setLang } = useStore()
-  const [role, setSelRole] = useState(null)
+
+  // The public intro is venue-only. The rep track stays reachable for internal
+  // reps via a private link (?role=rep) so its content is not orphaned.
+  const showRep = new URLSearchParams(window.location.search).get('role') === 'rep'
+  const tracks = [
+    { id: 'venue', label: t('role.venue'), blurb: t('role.venueBlurb'), gives: t('role.venueGives', { returnObjects: true }) },
+    ...(showRep
+      ? [{ id: 'rep', label: t('role.rep'), blurb: t('role.repBlurb'), gives: t('role.repGives', { returnObjects: true }) }]
+      : []),
+  ]
+  // With a single track, preselect it so the screen reads as a welcome.
+  const [role, setSelRole] = useState(tracks.length === 1 ? tracks[0].id : null)
 
   const start = () => {
     if (!role) return
@@ -27,11 +38,6 @@ export default function RoleSelect() {
     i18n.changeLanguage(code)
   }
 
-  const tracks = [
-    { id: 'venue', label: t('role.venue'), blurb: t('role.venueBlurb'), gives: t('role.venueGives', { returnObjects: true }) },
-    { id: 'rep', label: t('role.rep'), blurb: t('role.repBlurb'), gives: t('role.repGives', { returnObjects: true }) },
-  ]
-
   return (
     <div className="shell">
       <header className="appbar">
@@ -39,7 +45,7 @@ export default function RoleSelect() {
       </header>
       <main className="page">
         <p className="eyebrow">{t('app.name')}</p>
-        <h1>{t('role.title')}</h1>
+        <h1>{tracks.length === 1 ? t('role.welcomeTitle') : t('role.title')}</h1>
         <TranslateBanner />
 
         {/* Tap 1: role, with a preview of what the track gives. */}

@@ -16,6 +16,7 @@ export default {
   },
   role: {
     title: 'Who are you here as?',
+    welcomeTitle: 'Welcome to NON Academy',
     intro: 'Choose your track. You can change it later. The product knowledge is shared; the skills are built for your role.',
     rep: 'NON Sales Rep',
     repBlurb: 'Win the listing. Sell into venues and distributors.',
@@ -133,6 +134,7 @@ export default {
     consent: 'I agree my training progress can be shared with my venue or distributor manager.',
     consentError: 'Please agree so your manager can see your progress.',
     emailError: 'Enter a valid email.',
+    emailHint: 'Use a work or personal email, whichever you check.',
     cta: 'Claim my certificate',
     privacy: 'We use your email to send your certificate and track your progress. Your manager sees only your venue or distributor team.',
   },
