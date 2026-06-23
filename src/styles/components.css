@@ -918,3 +918,22 @@
 .lang-chip .lang-flag {
   margin-right: 8px;
 }
+
+/* Signup / email-capture form. */
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+.form-stack .field-label {
+  margin-top: 8px;
+}
+.form-stack .field:first-of-type {
+  margin-top: 0;
+}
+.field-error {
+  margin: 2px 0 0;
+  color: var(--no);
+  font-size: 13px;
+}

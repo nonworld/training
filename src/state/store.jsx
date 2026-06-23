@@ -72,13 +72,38 @@ export function StoreProvider({ children }) {
     setState((s) => ({ ...s, streak: advanceStreak(s.streak) }))
   }, [])
 
+  // Sync the learner and their event funnel to the backend (Worker + D1), but
+  // only once we have an email and consent (captured at certificate claim).
+  // Debounced; offline-safe; the server dedupes events by id, so resending the
+  // full list is harmless. No-op (501) until D1 is bound.
+  const syncTimer = useRef(null)
+  useEffect(() => {
+    const p = state.profile
+    if (!p?.email || !p?.consent) return
+    clearTimeout(syncTimer.current)
+    syncTimer.current = setTimeout(() => {
+      syncToBackend({
+        learner: {
+          email: p.email,
+          name: p.name || null,
+          role: p.role || state.role || null,
+          market: p.market || null,
+          venue: p.venue || null,
+          consent: true,
+        },
+        events: state.events,
+      })
+    }, 1200)
+    return () => clearTimeout(syncTimer.current)
+  }, [state.profile, state.events, state.role])
+
   const api = useMemo(() => {
     const update = (patch) => setState((s) => ({ ...s, ...patch }))
 
-    // Append a funnel event. Local for now; flushed to the Worker later.
+    // Append a funnel event with a stable id so backend sync can dedupe.
     const logEvent = (s, type, meta) => ({
       ...s,
-      events: [...s.events, { type, ts: new Date().toISOString(), meta: meta || null }],
+      events: [...s.events, { id: eventId(), type, ts: new Date().toISOString(), meta: meta || null }],
     })
 
     // Award XP once per dedupe key. Returns gained amount via the awarded ledger.
@@ -244,6 +269,31 @@ export function useStore() {
   const ctx = useContext(StoreCtx)
   if (!ctx) throw new Error('useStore must be used inside StoreProvider')
   return ctx
+}
+
+// Stable per-event id for idempotent backend sync.
+function eventId() {
+  try {
+    if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID()
+  } catch {
+    /* fall through */
+  }
+  return `e_${Date.now()}_${Math.floor(Math.random() * 1e9).toString(36)}`
+}
+
+// Sync the learner + event funnel to the Worker (POST /api/events -> D1).
+// No-op (501) until D1 is bound. Failures are swallowed so offline use and a
+// not-yet-configured backend never block the learner.
+async function syncToBackend(payload) {
+  try {
+    await fetch('/api/events', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+  } catch {
+    // offline or endpoint not deployed yet; local state stands and will resend.
+  }
 }
 
 // Optional persistence to a Cloudflare Worker + KV. No-op (501) until the

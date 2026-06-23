@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 import QuizRunner from '../components/QuizRunner.jsx'
 import CertCard from '../components/CertCard.jsx'
+import SignupForm from '../components/SignupForm.jsx'
 import TranslateBanner from '../components/TranslateBanner.jsx'
 import { useStore } from '../state/store.jsx'
 import { XP, levelInfo } from '../state/gamification.js'
@@ -67,7 +68,12 @@ export default function Certification() {
     )
   }
 
-  // Earned: badge + shareable card + quick reference.
+  // Earned, but capture email first (the certificate is the point of value).
+  if (earned && !state.profile?.email) {
+    return <SignupForm onDone={() => {}} />
+  }
+
+  // Earned and captured: badge + shareable card + quick reference.
   if (earned) {
     return (
       <>
