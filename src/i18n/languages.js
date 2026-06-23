@@ -16,6 +16,12 @@ export const LANGUAGES = [
   { code: 'es', label: 'Español', flag: '🇪🇸', translated: false, dir: 'ltr' },
   { code: 'ja', label: '日本語', flag: '🇯🇵', translated: false, dir: 'ltr' },
   { code: 'ko', label: '한국어', flag: '🇰🇷', translated: false, dir: 'ltr' },
+  { code: 'nl', label: 'Nederlands', flag: '🇳🇱', translated: false, dir: 'ltr' },
+  // "Belgium" added as Belgian Dutch (Flemish). Switch label/flag to Belgian
+  // French if that is the intended market.
+  { code: 'nl-BE', label: 'Nederlands (België)', flag: '🇧🇪', translated: false, dir: 'ltr' },
+  { code: 'pl', label: 'Polski', flag: '🇵🇱', translated: false, dir: 'ltr' },
+  { code: 'th', label: 'ไทย', flag: '🇹🇭', translated: false, dir: 'ltr' },
 ]
 
 export const DEFAULT_LANG = 'en'
