@@ -8,4 +8,4 @@
 //   1. Replace the re-export below with a full copy of en.js's structure.
 //   2. Translate every string. Keep the NON1–NON9 codes untouched.
 //   3. Set `translated: true` for "fr" in i18n/languages.js.
-export { skus, modules, certifications, default } from './en.js'
+export { skus, skuRecallBank, modules, certifications, default } from './en.js'

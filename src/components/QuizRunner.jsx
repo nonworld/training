@@ -1,35 +1,47 @@
-// Reusable quiz engine, shared by per-module formative quizzes and the final
-// certification exam. One question at a time. A correct answer fires a fast
-// micro-celebration (tick + XP float) to keep the effort-reward loop tight. A
-// wrong answer teaches: it shows the explanation in NON's voice rather than just
-// marking it incorrect. Scored against the quiz's pass threshold.
+// Reusable quiz engine, shared by per-module formative quizzes, the spaced
+// recall openers, and the final certification exams. One item at a time.
+//
+// Items can be plain multiple choice or a weighted performance task (menu
+// pairing, beverage-list gap). Each item is worth `possible` points; the final
+// score is earned/possible across the exam, so a pairing task counts for more
+// than a single recall question. Choice-only quizzes score exactly as before.
+//
+// A correct answer fires a fast micro-celebration. A wrong answer teaches: it
+// shows the explanation in NON's voice rather than just marking it incorrect.
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { XP } from '../state/gamification.js'
 import { playTick } from '../lib/sound.js'
 import { useStore } from '../state/store.jsx'
+import { isAnswered, scoreItem } from '../lib/scoreItem.js'
+import MenuItem from './items/MenuItem.jsx'
+import ListItem from './items/ListItem.jsx'
 
 export default function QuizRunner({ quiz, onScore, renderResultActions }) {
   const { t } = useTranslation()
   const { state, awardQuizCorrect } = useStore()
   const [i, setI] = useState(0)
-  const [picked, setPicked] = useState(null)
+  const [value, setValue] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [correctCount, setCorrect] = useState(0)
+  const [earnedTotal, setEarnedTotal] = useState(0)
+  const [possibleTotal, setPossibleTotal] = useState(0)
   const [done, setDone] = useState(false)
   const [finalScore, setFinalScore] = useState(0)
   const [gain, setGain] = useState(false)
 
   const questions = quiz.questions
-  const q = questions[i]
-  const isRight = revealed && picked === q.answer
+  const item = questions[i]
+  const type = item.type || 'choice'
+  const result = revealed ? scoreItem(item, value) : null
 
   const submit = () => {
-    if (picked === null) return
-    if (picked === q.answer) {
-      setCorrect((c) => c + 1)
-      awardQuizCorrect(quiz.id, q.id)
+    if (!isAnswered(item, value)) return
+    const r = scoreItem(item, value)
+    setEarnedTotal((e) => e + r.earned)
+    setPossibleTotal((p) => p + r.possible)
+    if (r.earned > 0) {
+      awardQuizCorrect(quiz.id, item.id)
       playTick(state.soundMuted)
       setGain(true)
       setTimeout(() => setGain(false), 900)
@@ -39,22 +51,23 @@ export default function QuizRunner({ quiz, onScore, renderResultActions }) {
 
   const next = () => {
     if (i === questions.length - 1) {
-      const score = Math.round((correctCount / questions.length) * 100)
+      const score = possibleTotal ? Math.round((earnedTotal / possibleTotal) * 100) : 0
       setFinalScore(score)
       setDone(true)
       onScore?.(score, score >= quiz.threshold)
     } else {
       setI((n) => n + 1)
-      setPicked(null)
+      setValue(null)
       setRevealed(false)
     }
   }
 
   const retake = () => {
     setI(0)
-    setPicked(null)
+    setValue(null)
     setRevealed(false)
-    setCorrect(0)
+    setEarnedTotal(0)
+    setPossibleTotal(0)
     setDone(false)
     setFinalScore(0)
   }
@@ -74,6 +87,16 @@ export default function QuizRunner({ quiz, onScore, renderResultActions }) {
     )
   }
 
+  // Feedback header: full marks, partial, or wrong.
+  const fbClass = result ? (result.full ? 'ok' : result.earned > 0 ? 'part' : 'no') : ''
+  const fbLabel = result
+    ? result.full
+      ? t('quiz.correct')
+      : result.earned > 0
+        ? t('quiz.partial', { earned: result.earned, possible: result.possible })
+        : t('quiz.incorrect')
+    : ''
+
   return (
     <>
       <p className="eyebrow">{t('quiz.question', { current: i + 1, total: questions.length })}</p>
@@ -81,37 +104,48 @@ export default function QuizRunner({ quiz, onScore, renderResultActions }) {
         <span style={{ width: `${((i + 1) / questions.length) * 100}%` }} />
       </div>
 
-      <h2 style={{ fontSize: 22 }}>{q.prompt}</h2>
+      <h2 style={{ fontSize: 22 }}>{item.prompt}</h2>
 
-      <div className="stack" style={{ marginTop: 16 }}>
-        {q.options.map((opt, oi) => {
-          let cls = 'opt'
-          if (revealed) {
-            if (oi === q.answer) cls += ' correct'
-            else if (oi === picked) cls += ' wrong'
-          } else if (oi === picked) cls += ' picked'
-          return (
-            <button key={oi} className={cls} disabled={revealed} onClick={() => setPicked(oi)}>
-              {opt}
-            </button>
-          )
-        })}
-      </div>
-
-      {gain && (
-        <div className="xp-float" aria-hidden="true">+{XP.QUIZ_CORRECT} XP</div>
+      {type === 'menu' && (
+        <MenuItem item={item} value={value} onChange={setValue} revealed={revealed} />
+      )}
+      {type === 'list' && (
+        <ListItem item={item} value={value} onChange={setValue} revealed={revealed} />
+      )}
+      {type === 'choice' && (
+        <div className="stack" style={{ marginTop: 16 }}>
+          {item.options.map((opt, oi) => {
+            let cls = 'opt'
+            if (revealed) {
+              if (oi === item.answer) cls += ' correct'
+              else if (oi === value?.choice) cls += ' wrong'
+            } else if (oi === value?.choice) cls += ' picked'
+            return (
+              <button
+                key={oi}
+                className={cls}
+                disabled={revealed}
+                onClick={() => setValue({ choice: oi })}
+              >
+                {opt}
+              </button>
+            )
+          })}
+        </div>
       )}
 
+      {gain && <div className="xp-float" aria-hidden="true">+{XP.QUIZ_CORRECT} XP</div>}
+
       {revealed && (
-        <div className={`feedback ${isRight ? 'ok' : 'no'}`}>
-          <strong>{isRight ? t('quiz.correct') : t('quiz.incorrect')}</strong>
-          <p style={{ margin: '6px 0 0' }}>{q.explanation}</p>
+        <div className={`feedback ${fbClass}`}>
+          <strong>{fbLabel}</strong>
+          <p style={{ margin: '6px 0 0' }}>{item.explanation}</p>
         </div>
       )}
 
       <div className="seg-nav">
         {!revealed ? (
-          <button className="btn" onClick={submit} disabled={picked === null}>
+          <button className="btn" onClick={submit} disabled={!isAnswered(item, value)}>
             {t('quiz.submit')}
           </button>
         ) : (

@@ -4,7 +4,8 @@
 const BADGE_EMOJI = {
   // shared core
   'brand-story': '📖',
-  'product-mastery': '🍷',
+  'product-foundation': '🍷',
+  'product-pairing': '🥂',
   'category-context': '📈',
   // rep track
   'rep-list-placement': '📝',

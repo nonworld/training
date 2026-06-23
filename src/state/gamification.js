@@ -11,6 +11,7 @@ export const XP = {
   CERT: 200, // earning a role certification
   FLASHCARD: 3, // grading a flashcard "got it" (first time per card)
   PRECHECK: 5, // completing a module pre-check
+  RECALL: 5, // completing a module's spaced SKU recall (first time)
 }
 
 // Levels unlock as cumulative XP accrues. Each entry is the XP required to

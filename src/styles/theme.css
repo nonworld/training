@@ -28,6 +28,8 @@
 
   --ok: #2e7d4f; /* AA-contrast green on white */
   --no: #b3261e; /* AA-contrast red on white */
+  --part: #8a6d3b; /* partial-credit amber */
+  --non-accent: #8e2c3b; /* NON raspberry, used for accents and SVG glyphs */
 
   --tap: 56px; /* minimum one-handed tap target */
   --shell-max: 720px; /* readable column even on a laptop */

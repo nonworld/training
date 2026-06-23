@@ -27,6 +27,8 @@ const EMPTY = {
   streak: { current: 0, longest: 0, lastActive: null },
   awarded: {}, // dedupe ledger: { [key]: true } so XP is never double-counted
   flashcards: {}, // { [cardId]: { box, lastSeen } } — simple spaced repetition
+  recallDone: {}, // { [moduleId]: true } — spaced recall opener completed
+  flashcardRounds: {}, // { [moduleId]: true } — a full flashcard round completed
   soundMuted: false,
 
   // data capture (populated later, at first point of real value)
@@ -127,6 +129,24 @@ export function StoreProvider({ children }) {
       quiz: (quizId) => state.quizzes[quizId] || null,
       recordPreCheck: (moduleId) =>
         setState((s) => awardXp(s, `precheck:${moduleId}`, XP.PRECHECK)),
+
+      // Spaced SKU recall at the open of a module.
+      markRecallDone: (moduleId) =>
+        setState((s) => {
+          let next = { ...s, recallDone: { ...s.recallDone, [moduleId]: true } }
+          next = awardXp(next, `recall:${moduleId}`, XP.RECALL)
+          return logEvent(next, 'recall_done', { moduleId })
+        }),
+      isRecallDone: (moduleId) => Boolean(state.recallDone[moduleId]),
+
+      // A completed flashcard round (used to gate "The Six and the Structure").
+      completeFlashcardRound: (moduleId = 'global') =>
+        setState((s) => ({
+          ...s,
+          flashcardRounds: { ...s.flashcardRounds, [moduleId]: true, global: true },
+        })),
+      hasFlashcardRound: (moduleId) =>
+        Boolean(state.flashcardRounds[moduleId] || state.flashcardRounds.global),
 
       // ---- flashcards (simple Leitner-style spaced repetition) ----
       gradeFlashcard: (cardId, got) =>

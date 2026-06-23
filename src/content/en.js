@@ -116,6 +116,70 @@ export const skus = [
   },
 ]
 
+// ----------------------------------------------------- SKU recall question bank
+// Authored once. Used by the mandatory recall in "The Six and the Structure",
+// the recall opener in "Pairing Like a Somm", and the spaced recall at the open
+// of every later pairing module (see `spacedRecall` on those modules). Pull with
+// getSkuRecall(code, moduleId, count) in content/registry.js.
+export const skuRecallBank = [
+  {
+    id: 'b1',
+    prompt: 'Which two SKUs are still rather than sparkling?',
+    options: ['NON1 and NON5', 'NON3 and NON9', 'NON2 and NON7', 'NON5 and NON7'],
+    answer: 1,
+    explanation: 'NON3 Toasted Cinnamon & Yuzu and NON9 Oaked Blackberry & Plum are the still SKUs.',
+  },
+  {
+    id: 'b2',
+    prompt: 'Which SKU leads with a savoury, umami character from kombu?',
+    options: ['NON1', 'NON2', 'NON5', 'NON7'],
+    answer: 1,
+    explanation: 'NON2 Caramelised Pear & Kombu is the savoury, umami-led SKU.',
+  },
+  {
+    id: 'b3',
+    prompt: 'A guest wants the boldest sparkling, something that drinks like a red. What do you pour?',
+    options: ['NON1', 'NON5', 'NON7', 'NON2'],
+    answer: 2,
+    explanation: 'NON7 Stewed Cherry & Coffee is the boldest, most red-like sparkling.',
+  },
+  {
+    id: 'b4',
+    prompt: 'Which SKU is the bright, high-acid one built for oysters and fried, salty food?',
+    options: ['NON5', 'NON2', 'NON9', 'NON3'],
+    answer: 0,
+    explanation: 'NON5 Lemon Marmalade & Hibiscus is the sharpest, made to cut salt and brine.',
+  },
+  {
+    id: 'b5',
+    prompt: 'A committed red drinker is on lamb and not drinking. What do you pour?',
+    options: ['NON1 in a flute', 'NON9 in a red wine stem', 'NON5 over ice', 'NON2 in a tumbler'],
+    answer: 1,
+    explanation: 'NON9 Oaked Blackberry & Plum is full bodied and tannic. Red wine stem.',
+  },
+  {
+    id: 'b6',
+    prompt: 'Which SKU is the easy aperitif, raspberry led with a saline edge?',
+    options: ['NON2', 'NON7', 'NON1', 'NON3'],
+    answer: 2,
+    explanation: 'NON1 Salted Raspberry & Chamomile is the bright, dry first pour.',
+  },
+  {
+    id: 'b7',
+    prompt: 'Which still SKU bridges warm spice and sharp citrus, strong with duck?',
+    options: ['NON3', 'NON9', 'NON5', 'NON7'],
+    answer: 0,
+    explanation: 'NON3 Toasted Cinnamon & Yuzu. Lightly chilled, red wine stem.',
+  },
+  {
+    id: 'b8',
+    prompt: 'How many SKUs does NON make, and how do they split?',
+    options: ['Six: four sparkling, two still', 'Nine, all sparkling', 'Six, all still', 'Four sparkling only'],
+    answer: 0,
+    explanation: 'Six SKUs: four sparkling (NON1, NON2, NON5, NON7), two still (NON3, NON9).',
+  },
+]
+
 // ============================================================ SHARED CORE
 const brandStory = {
   id: 'brand-story',
@@ -213,13 +277,14 @@ const brandStory = {
         id: 'q3',
         prompt: 'A guest asks what NON is. What is the strongest answer?',
         options: [
-          'It is a non-alcoholic alternative to wine',
-          'It is a low-sugar fizzy drink',
-          'It is a considered drink built like wine, made for the table',
-          'It is a fancy mocktail',
+          'It is a soft drink for people who are not drinking',
+          'It is a considered drink, built like wine, made for the table',
+          'It is a sugar-free health drink',
+          'It is a cheaper option when you skip the wine',
         ],
-        answer: 2,
-        explanation: 'Lead with flavour, care and the occasion. Avoid mocktail and alternative.',
+        answer: 1,
+        explanation:
+          'NON is built like wine and belongs on the table as an equal. The other three all trade it down: a soft drink, a health drink, a cheap substitute.',
       },
       {
         id: 'q4',
@@ -239,6 +304,7 @@ const brandStory = {
 
 const categoryContext = {
   id: 'category-context',
+  spacedRecall: { count: 3 },
   track: 'shared',
   status: 'ready',
   eyebrow: 'Shared core',
@@ -360,6 +426,7 @@ const categoryContext = {
 // ============================================================ REP TRACK
 const repListPlacement = {
   id: 'rep-list-placement',
+  spacedRecall: { count: 3 },
   track: 'rep',
   status: 'ready',
   eyebrow: 'Rep track',
@@ -479,6 +546,7 @@ const repListPlacement = {
 
 const repReadingProgram = {
   id: 'rep-reading-program',
+  spacedRecall: { count: 3 },
   track: 'rep',
   status: 'ready',
   eyebrow: 'Rep track',
@@ -867,6 +935,7 @@ const repAccountPlanning = {
 // ============================================================ VENUE TRACK
 const venueRecommending = {
   id: 'venue-recommending',
+  spacedRecall: { count: 3 },
   track: 'venue',
   status: 'ready',
   eyebrow: 'Venue track',
@@ -1189,6 +1258,7 @@ const venueServeRitual = {
 
 const venuePairingMenu = {
   id: 'venue-pairing-menu',
+  spacedRecall: { count: 3 },
   track: 'venue',
   status: 'ready',
   eyebrow: 'Venue track',
@@ -1297,6 +1367,7 @@ const venuePairingMenu = {
 
 const venueScepticalGuest = {
   id: 'venue-sceptical-guest',
+  spacedRecall: { count: 3 },
   track: 'venue',
   status: 'ready',
   eyebrow: 'Venue track',
@@ -1393,24 +1464,25 @@ const venueScepticalGuest = {
 
 // --------------------------------------------------- the Product Mastery module
 // the reference standard, built first.
-const productMastery = {
-  id: 'product-mastery',
+// --------------------------------------------------- Product Mastery, split
+// 2A "The Six and the Structure" — recall and recognition. Goal: know the six
+// cold. Ends with a MANDATORY flashcard round before the module can complete.
+const productFoundation = {
+  id: 'product-foundation',
   track: 'shared',
   status: 'ready',
   eyebrow: 'Shared core',
-  title: 'Product Mastery',
+  title: 'The Six and the Structure',
   summary:
-    'The six SKUs, how to taste them, and how to place them. The foundation for every conversation, in any role.',
+    'The six SKUs at a glance: still versus sparkling, and why NON is built on structure, not sweetness. Learn them cold.',
   objectives: [
     'Name all six NON SKUs and state whether each is still or sparkling.',
-    'Describe the lead flavour and the structure of each SKU in one sentence.',
-    'Match each SKU to at least one dish or course.',
-    'Explain why NON is poured in stemware and listed beside the wine, not the soft drinks.',
+    'Recall the lead flavour and structure of each SKU in one sentence.',
+    'Explain why NON is poured in stemware and listed beside the wine.',
   ],
-  // Optional pre-check. Confident staff can prove they already know the basics
-  // and skip ahead; everyone else sees why the module is worth their time.
+  requireFlashcards: true,
   preCheck: {
-    id: 'precheck-product-mastery',
+    id: 'precheck-product-foundation',
     passToSkip: 100,
     questions: [
       {
@@ -1496,28 +1568,13 @@ const productMastery = {
         'NON3 bridges spice and citrus. Strong with duck and squash.',
       ],
     },
-    {
-      id: 'pairing-principles',
-      title: 'Pairing like a somm',
-      minutes: 5,
-      body: [
-        'Pair NON the way you pair wine. Match weight to weight, use acidity to cut richness, and let structure stand up to protein.',
-        'Light and bright with delicate plates: NON1 and NON5 with raw fish, shellfish and fresh cheese. Savoury and rounded with mushroom, roast chicken, umami: NON2. Structured with red meat and braises: NON7, and the still NON9.',
-        'You do not need a perfect match. You need a confident one. Name the SKU, name the dish, pour it in the right glass.',
-      ],
-      points: [
-        'Weight to weight, acidity against richness.',
-        'Sparkling for fresh and fried; still for red meat.',
-        'A confident pairing beats a perfect one.',
-      ],
-    },
   ],
   practical: {
     title: 'Practical task',
-    body: 'Pour NON3 and NON7 side by side in the correct glassware. Write one tasting sentence for each in the NON voice, then name one dish you would pair with each. Keep it dry, considered, and free of mocktail language.',
+    body: 'From memory, list all six SKUs with their format (still or sparkling) and one word for each lead flavour. Check yourself against the quick-reference cards.',
   },
   quiz: {
-    id: 'product-mastery',
+    id: 'product-foundation',
     threshold: 80,
     questions: [
       {
@@ -1525,45 +1582,163 @@ const productMastery = {
         prompt: 'Which two SKUs are still rather than sparkling?',
         options: ['NON1 and NON5', 'NON3 and NON9', 'NON2 and NON7', 'NON5 and NON7'],
         answer: 1,
-        explanation: 'NON3 Toasted Cinnamon & Yuzu and NON9 Oaked Blackberry & Plum are the two still SKUs.',
+        explanation: 'NON3 Toasted Cinnamon & Yuzu and NON9 Oaked Blackberry & Plum are the still SKUs.',
       },
       {
         id: 'q2',
-        prompt: 'A guest wants something that drinks like a red wine alongside lamb. What do you pour?',
-        options: ['NON1 in a flute', 'NON5 over ice', 'NON9 in a red wine stem', 'NON2 in a tumbler'],
-        answer: 2,
-        explanation: 'NON9 is full bodied with tannic structure and pairs with red meat. Serve it in a red wine glass.',
-      },
-      {
-        id: 'q3',
         prompt: 'Which SKU leads with a savoury, umami character from kombu?',
         options: ['NON1', 'NON2', 'NON5', 'NON7'],
         answer: 1,
         explanation: 'NON2 Caramelised Pear & Kombu is the savoury, umami-led SKU in the range.',
       },
       {
-        id: 'q4',
-        prompt: 'How should you describe NON to a sceptical guest expecting a sweet soft drink?',
-        options: [
-          'As a refreshing mocktail alternative',
-          'As a low-sugar fizzy drink',
-          'As a structured, dry drink built like wine, poured in stemware',
-          'As a fruit juice with bubbles',
-        ],
+        id: 'q3',
+        prompt: 'Which is the sharpest, highest-acid sparkling, built for shellfish and fried food?',
+        options: ['NON1', 'NON2', 'NON5', 'NON7'],
         answer: 2,
-        explanation: 'NON trades up. Describe structure and dryness, pour it in the right glass, and never call it a mocktail.',
+        explanation: 'NON5 Lemon Marmalade & Hibiscus is the tart, bracing one.',
+      },
+      {
+        id: 'q4',
+        prompt: 'Which SKU is the boldest sparkling, the one that drinks closest to a red?',
+        options: ['NON1', 'NON5', 'NON7', 'NON3'],
+        answer: 2,
+        explanation: 'NON7 Stewed Cherry & Coffee. Dark, dry, structured.',
       },
       {
         id: 'q5',
-        prompt: 'Which pairing follows sound principle?',
+        prompt: 'Why is NON poured in stemware and listed beside the wine?',
         options: [
-          'NON5 with rich braised beef',
-          'NON1 or NON5 with oysters and shellfish',
-          'NON9 with delicate raw fish',
-          'NON2 with nothing, it does not pair',
+          'It looks fancy',
+          'Because it is built like wine and trades up, not down',
+          'There are no soft-drink glasses',
+          'To charge more for the same thing',
         ],
         answer: 1,
-        explanation: 'The bright, high-acid sparkling SKUs cut through salt and brine. NON1 and NON5 work with shellfish.',
+        explanation: 'Stemware and placement signal a considered drink. NON trades up.',
+      },
+    ],
+  },
+}
+
+// 2B "Pairing Like a Somm" — application. Opens with a spaced recall of the six
+// from 2A, then the three principles, a worked example, and guided practice.
+const productPairing = {
+  id: 'product-pairing',
+  track: 'shared',
+  status: 'ready',
+  eyebrow: 'Shared core',
+  title: 'Pairing Like a Somm',
+  summary:
+    'Three pairing principles, a worked example, then guided practice. Turn knowing the six into pairing them on the fly.',
+  objectives: [
+    'Apply the three pairing principles to match a SKU to a dish.',
+    'Pair each SKU to at least one dish or course with a reason.',
+    'Recommend a confident pour for an unfamiliar dish.',
+  ],
+  spacedRecall: { count: 3 },
+  workedExample: {
+    label: 'A model pairing',
+    setup: 'A guest orders the seared scallops to start, then the lamb, and is not drinking.',
+    model: [
+      'Scallops are delicate, sweet and a little rich. I reach for NON1, bright and dry with a saline edge, in a white wine stem. It lifts the dish without covering it.',
+      'Lamb is rich and full. I move to NON9, the still oaked blackberry and plum, in a red wine stem at cellar temperature. Its tannin stands up to the meat the way a red would.',
+    ],
+    callouts: [
+      'Weight to weight: light SKU for the delicate plate, full SKU for the rich one.',
+      'Right glass each time. The ritual is part of the pour.',
+      'A reason in one line. Not "this one is nice", but why it works.',
+    ],
+  },
+  segments: [
+    {
+      id: 'pairing-principles',
+      title: 'The three principles',
+      minutes: 5,
+      body: [
+        'Pair NON the way you pair wine, on three principles. Match weight to weight. Use acidity to cut richness. Let structure stand up to protein.',
+        'Light and bright with delicate plates: NON1 and NON5 with raw fish, shellfish and fresh cheese. Savoury and rounded with mushroom, roast chicken and umami: NON2. Structured with red meat and braises: NON7, and the still NON9.',
+        'You do not need a perfect match. You need a confident one. Name the SKU, name the dish, pour it in the right glass.',
+      ],
+      points: [
+        'Weight to weight.',
+        'Acidity against richness.',
+        'Structure against protein.',
+      ],
+    },
+    {
+      id: 'guided-practice',
+      title: 'Guided practice',
+      minutes: 5,
+      body: [
+        'Work through these out loud before you taste. A guest orders oysters: reach for NON5, the bracing acid cuts the brine. A mushroom risotto: NON2, savoury meets savoury. A chocolate dessert: NON7, dark fruit and coffee echo the cocoa.',
+        'Notice the move each time: read the weight and the dominant flavour, pick the SKU that meets it, name why in a line.',
+        'Then push yourself on a dish not covered here. That is the skill the certification tests.',
+      ],
+      points: [
+        'Read weight and dominant flavour first.',
+        'Meet richness with acid, protein with structure.',
+        'Always close with a one-line reason.',
+      ],
+    },
+  ],
+  practical: {
+    title: 'Practical task',
+    body: 'Take three dishes off a menu you know. For each, name the SKU you would pour, the glass, and a one-line reason. Then have someone quiz you on a dish you have not pre-planned.',
+  },
+  quiz: {
+    id: 'product-pairing',
+    threshold: 80,
+    questions: [
+      {
+        id: 'q1',
+        prompt: 'A guest orders oysters to start. Which pour and why?',
+        options: [
+          'NON9, its tannin suits shellfish',
+          'NON5, its bracing acid cuts the brine',
+          'NON2, its umami matches the sea',
+          'NON7, its coffee note lifts oysters',
+        ],
+        answer: 1,
+        explanation: 'High-acid NON5 cuts salt and brine. Weight and acidity both fit.',
+      },
+      {
+        id: 'q2',
+        prompt: 'The main is a rich mushroom risotto. Best pour?',
+        options: ['NON1', 'NON2', 'NON5', 'NON9'],
+        answer: 1,
+        explanation: 'NON2 is savoury and rounded with umami from kombu. Savoury meets savoury.',
+      },
+      {
+        id: 'q3',
+        prompt: 'Which principle pairs a full, tannic SKU with red meat?',
+        options: [
+          'Acidity against richness',
+          'Weight to weight and structure against protein',
+          'Sweetness against salt',
+          'Bubbles against fat',
+        ],
+        answer: 1,
+        explanation: 'Match the weight and let structure stand up to the protein. NON9 with lamb.',
+      },
+      {
+        id: 'q4',
+        prompt: 'A guest is on a dark chocolate dessert. Which sparkling SKU echoes it best?',
+        options: ['NON1', 'NON5', 'NON7', 'NON2'],
+        answer: 2,
+        explanation: 'NON7 Stewed Cherry & Coffee mirrors cocoa and dark fruit.',
+      },
+      {
+        id: 'q5',
+        prompt: 'What makes a pairing recommendation land with a guest?',
+        options: [
+          'A perfect, scientific match',
+          'A confident choice named with a one-line reason',
+          'Offering all six and letting them choose',
+          'Avoiding any comparison to wine',
+        ],
+        answer: 1,
+        explanation: 'A confident pairing beats a perfect one. Name the SKU and why in one line.',
       },
     ],
   },
@@ -1573,7 +1748,8 @@ const productMastery = {
 // the role tracks. getModulesForRole filters shared + the active role.
 export const modules = [
   brandStory,
-  productMastery,
+  productFoundation,
+  productPairing,
   categoryContext,
   // rep track
   repListPlacement,
@@ -1601,7 +1777,8 @@ export const certifications = {
       'Complete the shared core and the venue track, then pass the final exam to earn the NON Certified Sommelier badge and unlock the on-shift quick-reference cards.',
     requires: [
       'brand-story',
-      'product-mastery',
+      'product-foundation',
+      'product-pairing',
       'category-context',
       'venue-recommending',
       'venue-trade-up',
@@ -1612,21 +1789,45 @@ export const certifications = {
     exam: {
       id: 'cert-venue',
       threshold: 80,
+      // Lead item is a performance task on an unseen menu. Then two scenarios,
+      // two serve/glassware items, and one recall backstop. New menu = content
+      // edit only (see the `menu` object), no code change.
       questions: [
         {
           id: 'e1',
-          prompt: 'A guest orders the snapper and is not drinking. What do you pour and in what glass?',
-          options: [
-            'NON9 in a red wine stem',
-            'NON5 in a white wine stem',
-            'NON7 over ice',
-            'A soda water in a tumbler',
-          ],
-          answer: 1,
-          explanation: 'Bright, high-acid NON5 suits fish, served in a white wine stem.',
+          type: 'menu',
+          prompt:
+            'A table of four, one guest not drinking, orders the set menu below. Pair one SKU to each course and give a one-line reason.',
+          menu: {
+            name: "Tonight's set menu",
+            courses: [
+              {
+                id: 'c1',
+                course: 'To start',
+                dish: 'Kingfish crudo, finger lime, cucumber',
+                accept: ['NON5', 'NON1'],
+              },
+              {
+                id: 'c2',
+                course: 'Main',
+                dish: 'Confit duck leg, witlof, burnt orange',
+                accept: ['NON3', 'NON7', 'NON9'],
+              },
+              {
+                id: 'c3',
+                course: 'Dessert',
+                dish: 'Bitter chocolate and salted caramel tart',
+                accept: ['NON7', 'NON9'],
+              },
+            ],
+          },
+          reasonPrompt: 'Why this pour?',
+          explanation:
+            'Weight to weight, acidity against richness, structure against the protein. Bright NON5 or NON1 lifts the delicate crudo. NON3, NON7 or the still NON9 meets the duck. NON7 or NON9 stands up to dark chocolate. A confident, reasoned pour is the job. [DRAFT: confirm the accepted SKUs per course with Aaron.]',
         },
         {
           id: 'e2',
+          type: 'choice',
           prompt: 'A guest says "I do not usually like those". Your move?',
           options: [
             'Insist they will like it',
@@ -1639,18 +1840,7 @@ export const certifications = {
         },
         {
           id: 'e3',
-          prompt: 'Which serve is correct?',
-          options: [
-            'Still SKUs in flutes, served warm',
-            'Sparkling SKUs well chilled in white wine stems',
-            'All SKUs over ice in tumblers',
-            'Still SKUs in white wine stems only',
-          ],
-          answer: 1,
-          explanation: 'Sparkling SKUs are served well chilled in white wine stems; still SKUs in red wine stems.',
-        },
-        {
-          id: 'e4',
+          type: 'choice',
           prompt: 'A guest asks for "just a lemonade". Best response?',
           options: [
             'Bring the lemonade without comment',
@@ -1662,19 +1852,34 @@ export const certifications = {
           explanation: 'Offer the trade up plainly and warmly. The default is an opening.',
         },
         {
-          id: 'e5',
-          prompt: 'How should you describe NON to avoid trading it down?',
+          id: 'e4',
+          type: 'choice',
+          prompt: 'Which serve is correct?',
           options: [
-            'As your best mocktail',
-            'As a structured, dry drink built like wine',
-            'As an alcohol-free alternative',
-            'As a healthy soft drink',
+            'Still SKUs in flutes, served warm',
+            'Sparkling SKUs well chilled in white wine stems',
+            'All SKUs over ice in tumblers',
+            'Still SKUs in white wine stems only',
           ],
           answer: 1,
-          explanation: 'Lead with flavour and structure. Avoid mocktail and alternative.',
+          explanation: 'Sparkling SKUs are served well chilled in white wine stems; still SKUs in red wine stems.',
+        },
+        {
+          id: 'e5',
+          type: 'choice',
+          prompt: 'A guest is on the still NON9 with their main. Glass and temperature?',
+          options: [
+            'Flute, well chilled',
+            'Red wine stem, cellar temperature',
+            'Tumbler over ice',
+            'White wine stem, room temperature',
+          ],
+          answer: 1,
+          explanation: 'The still SKUs go in red wine stems, served lightly chilled to cellar temperature.',
         },
         {
           id: 'e6',
+          type: 'choice',
           prompt: 'Which two SKUs are still?',
           options: ['NON1 and NON2', 'NON3 and NON9', 'NON5 and NON7', 'NON2 and NON5'],
           answer: 1,
@@ -1691,7 +1896,8 @@ export const certifications = {
       'Complete the shared core and the rep track, then pass the final exam to earn your NON Accreditation tier.',
     requires: [
       'brand-story',
-      'product-mastery',
+      'product-foundation',
+      'product-pairing',
       'category-context',
       'rep-list-placement',
       'rep-reading-program',
@@ -1702,33 +1908,50 @@ export const certifications = {
     exam: {
       id: 'cert-rep',
       threshold: 80,
+      // Lead item is a performance task on an unseen beverage list: find the gap
+      // and name the two SKUs to pitch with reasons. Then two objection
+      // scenarios, one pitch-structure item, and one recall backstop. New list =
+      // content edit only (see the `list` object), no code change.
       questions: [
         {
           id: 'e1',
-          prompt: 'What are the four beats of the 60-second pitch?',
-          options: [
-            'Price, discount, deal, contract',
-            'Gap, product, proof, ask',
-            'Story, awards, brand, history',
-            'Feature, feature, feature, feature',
-          ],
-          answer: 1,
-          explanation: 'Gap, product, proof, ask. Lead with the buyer’s gap, close with a pour.',
+          type: 'list',
+          prompt:
+            'You are pitching the venue below. Read their by-the-glass list, identify the gap, then choose the two SKUs you would pitch and why.',
+          list: {
+            name: 'The Cellar Door, by the glass',
+            lines: [
+              'Sparkling NV',
+              'Riesling',
+              'Chardonnay',
+              'Rosé',
+              'Pinot Noir',
+              'Shiraz',
+              'Soft drinks, juice, sparkling water',
+            ],
+          },
+          gap: {
+            prompt: 'Where is the gap?',
+            options: [
+              'No sparkling wine',
+              'Nothing considered for the guest who is not drinking',
+              'Too few red wines',
+              'No dessert wine',
+            ],
+            answer: 1,
+          },
+          pick: {
+            prompt: 'Name the two SKUs to pitch first',
+            count: 2,
+            accept: ['NON1', 'NON5', 'NON7', 'NON9'],
+          },
+          reasonPrompt: 'Why these two?',
+          explanation:
+            'The non-drinker lands on soft drinks, juice or water. That is the gap. Lead with two by the glass that cover the range: a bright opener (NON1 or NON5) and a structured pour for the reds drinker (NON7 or NON9). [DRAFT: confirm the accepted opening SKUs with Aaron.]',
         },
         {
           id: 'e2',
-          prompt: 'Where should NON sit on a venue list?',
-          options: [
-            'In the soft drinks section',
-            'Beside the wine, by the glass',
-            'On a novelty page',
-            'On the cocktail list only',
-          ],
-          answer: 1,
-          explanation: 'Placement is half the pitch. Beside the wine, by the glass, in stemware.',
-        },
-        {
-          id: 'e3',
+          type: 'choice',
           prompt: 'A buyer says NON is too expensive. Best response?',
           options: [
             'Offer a discount',
@@ -1740,26 +1963,8 @@ export const certifications = {
           explanation: 'NON is priced like wine and earns a wine-like margin. Reframe to margin per cover.',
         },
         {
-          id: 'e4',
-          prompt: 'A seafood-led venue. Which two SKUs do you bring?',
-          options: ['NON7 and NON9', 'NON1 and NON5', 'NON2 and NON3', 'NON3 and NON9'],
-          answer: 1,
-          explanation: 'Bright, high-acid sparkling suits seafood. NON1 and NON5.',
-        },
-        {
-          id: 'e5',
-          prompt: 'Why does running dry on a hero SKU matter?',
-          options: [
-            'It does not',
-            'An empty shelf is a lost sale and a quiet way to lose the listing',
-            'It saves space',
-            'It pushes wine sales',
-          ],
-          answer: 1,
-          explanation: 'A listing only earns if the stock is there to pour. Stay ahead of depletion.',
-        },
-        {
-          id: 'e6',
+          id: 'e3',
+          type: 'choice',
           prompt: 'A buyer says "we already have something". What works?',
           options: [
             'Argue yours is better',
@@ -1770,9 +1975,30 @@ export const certifications = {
           answer: 1,
           explanation: 'The incumbent is usually a soft drink. Let the difference show, then add by the glass.',
         },
+        {
+          id: 'e4',
+          type: 'choice',
+          prompt: 'What are the four beats of the 60-second pitch?',
+          options: [
+            'Price, discount, deal, contract',
+            'Gap, product, proof, ask',
+            'Story, awards, brand, history',
+            'Feature, feature, feature, feature',
+          ],
+          answer: 1,
+          explanation: 'Gap, product, proof, ask. Lead with the buyer’s gap, close with a pour.',
+        },
+        {
+          id: 'e5',
+          type: 'choice',
+          prompt: 'Which two SKUs are still?',
+          options: ['NON1 and NON2', 'NON3 and NON9', 'NON5 and NON7', 'NON2 and NON5'],
+          answer: 1,
+          explanation: 'NON3 and NON9 are the still SKUs.',
+        },
       ],
     },
   },
 }
 
-export default { skus, modules, certifications }
+export default { skus, skuRecallBank, modules, certifications }

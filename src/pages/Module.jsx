@@ -1,35 +1,59 @@
-// Module overview: an optional pre-check, observable objectives, the 5-minute
-// segments, a flashcard practice entry, the practical task, and the knowledge
-// check. The pre-check lets confident staff prove they know the basics and skip
-// ahead, and makes the content feel relevant to everyone else.
+// Module overview. Now supports:
+//  - a spaced SKU-recall opener (mod.spacedRecall) drawn from the shared bank,
+//    shown at the top until completed, for retention across pairing modules;
+//  - a mandatory flashcard round (mod.requireFlashcards) that gates the quiz,
+//    used by "The Six and the Structure";
+//  - a worked example (mod.workedExample): an annotated model performance shown
+//    before the practical and quiz, so novices see it modelled first;
+//  - the existing optional pre-check.
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import QuizRunner from '../components/QuizRunner.jsx'
 import { useStore } from '../state/store.jsx'
-import { getModule } from '../content/registry.js'
+import { getModule, getSkuRecall } from '../content/registry.js'
 
 export default function Module() {
   const { moduleId } = useParams()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { state, isSegmentDone, quiz, recordPreCheck } = useStore()
+  const { state, isSegmentDone, quiz, recordPreCheck, markRecallDone, isRecallDone, hasFlashcardRound } =
+    useStore()
   const [precheck, setPrecheck] = useState(false)
+  const [recall, setRecall] = useState(false)
 
   const mod = getModule(state.lang, moduleId)
   if (!mod || mod.status !== 'ready') return <Navigate to="/home" replace />
 
   const q = quiz(mod.quiz.id)
-  const hasFlashcards = mod.id === 'product-mastery'
+  const recallNeeded = Boolean(mod.spacedRecall) && !isRecallDone(mod.id)
+  const flashcardsRequired = Boolean(mod.requireFlashcards)
+  const flashcardsDone = hasFlashcardRound(mod.id)
+  const quizLocked = flashcardsRequired && !flashcardsDone
+
+  // Inline spaced SKU recall.
+  if (recall && mod.spacedRecall) {
+    const rq = getSkuRecall(state.lang, mod.id, mod.spacedRecall.count)
+    const onScore = () => markRecallDone(mod.id)
+    const actions = () => (
+      <button className="btn" onClick={() => setRecall(false)}>{t('module.recallContinue')}</button>
+    )
+    return (
+      <>
+        <p className="eyebrow">{mod.title} · {t('module.recall')}</p>
+        <QuizRunner quiz={rq} onScore={onScore} renderResultActions={actions} />
+      </>
+    )
+  }
 
   // Inline pre-check.
   if (precheck && mod.preCheck) {
     const pc = { id: mod.preCheck.id, threshold: mod.preCheck.passToSkip, questions: mod.preCheck.questions }
     const onScore = () => recordPreCheck(mod.id)
-    const actions = ({ passed }, retake) => (
+    const actions = ({ passed }) => (
       <>
-        {passed ? (
+        {passed && !quizLocked ? (
           <button className="btn" onClick={() => navigate(`/quiz/${mod.id}`)}>
             {t('module.skipToQuiz')}
           </button>
@@ -52,6 +76,18 @@ export default function Module() {
       <p className="eyebrow">{mod.eyebrow}</p>
       <h1>{mod.title}</h1>
       <p className="lede">{mod.summary}</p>
+
+      {recallNeeded && (
+        <button className="precheck-cta" onClick={() => setRecall(true)}>
+          <div>
+            <h3 style={{ margin: 0 }}>{t('module.recallTitle')}</h3>
+            <p style={{ margin: '4px 0 0', fontSize: 13 }}>
+              {t('module.recallBody', { count: mod.spacedRecall.count })}
+            </p>
+          </div>
+          <span className="card-chev">›</span>
+        </button>
+      )}
 
       {mod.preCheck && (
         <button className="precheck-cta" onClick={() => setPrecheck(true)}>
@@ -92,14 +128,38 @@ export default function Module() {
         )
       })}
 
-      {hasFlashcards && (
-        <button className="card" onClick={() => navigate('/flashcards')}>
+      {mod.workedExample && (
+        <>
+          <div className="divider" />
+          <div className="worked">
+            <p className="eyebrow" style={{ margin: '0 0 8px' }}>{t('module.worked')}</p>
+            <h3 style={{ margin: '0 0 8px' }}>{mod.workedExample.label}</h3>
+            <p className="worked-setup">{mod.workedExample.setup}</p>
+            {mod.workedExample.model.map((line, i) => (
+              <p key={i} className="worked-model">{line}</p>
+            ))}
+            {mod.workedExample.callouts?.length > 0 && (
+              <>
+                <p className="eyebrow" style={{ margin: '14px 0 6px' }}>{t('module.whyItWorks')}</p>
+                <ul className="objectives">
+                  {mod.workedExample.callouts.map((c, i) => <li key={i}>{c}</li>)}
+                </ul>
+              </>
+            )}
+          </div>
+        </>
+      )}
+
+      {flashcardsRequired && (
+        <button className={`card ${quizLocked ? 'card-required' : ''}`} onClick={() => navigate('/flashcards')}>
           <div className="card-row">
             <div>
-              <p className="eyebrow" style={{ margin: '0 0 6px' }}>{t('flash.title')}</p>
-              <h3 style={{ margin: 0 }}>{t('module.practise')}</h3>
+              <p className="eyebrow" style={{ margin: '0 0 6px' }}>
+                {t('flash.title')} · {quizLocked ? t('module.required') : t('module.completed')}
+              </p>
+              <h3 style={{ margin: 0 }}>{t('module.flashRound')}</h3>
             </div>
-            <span className="card-chev">›</span>
+            {flashcardsDone ? <span className="chip done">✓</span> : <span className="card-chev">›</span>}
           </div>
         </button>
       )}
@@ -109,8 +169,13 @@ export default function Module() {
       <h2>{mod.practical.title}</h2>
       <p>{mod.practical.body}</p>
 
-      <button className="btn" style={{ marginTop: 12 }} onClick={() => navigate(`/quiz/${mod.id}`)}>
-        {q?.passed ? `✓ ${t('module.quizCta')}` : t('module.quizCta')}
+      <button
+        className="btn"
+        style={{ marginTop: 12 }}
+        disabled={quizLocked}
+        onClick={() => navigate(`/quiz/${mod.id}`)}
+      >
+        {quizLocked ? t('module.flashFirst') : q?.passed ? `✓ ${t('module.quizCta')}` : t('module.quizCta')}
       </button>
     </>
   )

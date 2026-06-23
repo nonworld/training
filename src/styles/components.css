@@ -724,3 +724,119 @@
   line-height: 1;
   letter-spacing: 0;
 }
+
+/* =============================================================================
+ * Performance tasks (menu pairing, list gap), worked examples, recall
+ * ============================================================================= */
+.task {
+  margin-top: 16px;
+}
+.task-source {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--non-faint);
+  margin: 0 0 12px;
+}
+.task-course {
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--non-line);
+  border-radius: var(--radius);
+  background: var(--non-raise);
+}
+.task-course.ok { border-color: var(--ok); }
+.task-course.no { border-color: var(--no); }
+.task-course-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--non-faint);
+  margin: 0 0 4px;
+}
+.task-dish {
+  font-size: 16px;
+  color: var(--non-strong);
+  margin: 0 0 12px;
+}
+.task-q {
+  font-weight: 700;
+  margin: 18px 0 10px;
+}
+.task-list {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--non-line-soft);
+  border-radius: var(--radius);
+  background: var(--non-raise);
+}
+.task-list li {
+  padding: 4px 0;
+  color: var(--non-strong);
+  border-bottom: 1px solid var(--non-line-soft);
+}
+.task-list li:last-child { border-bottom: 0; }
+
+.sku-choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sku-pill {
+  min-height: 44px;
+  min-width: 60px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--non-line);
+  background: var(--non-dark);
+  color: var(--non-white);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.sku-pill.on {
+  background: var(--non-white);
+  color: var(--non-dark);
+  border-color: var(--non-white);
+}
+.sku-pill.good { background: var(--ok); border-color: var(--ok); color: #fff; }
+.sku-pill.bad { background: var(--no); border-color: var(--no); color: #fff; }
+.sku-pill[disabled] { cursor: default; }
+
+.task-reason {
+  margin-top: 12px;
+}
+.task-accept {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--non-dim);
+}
+
+.feedback.part strong { color: var(--part); }
+
+/* worked example: an annotated model performance */
+.worked {
+  padding: 18px 18px 18px 20px;
+  border: 1px solid var(--non-line-soft);
+  border-left: 3px solid var(--non-accent);
+  border-radius: var(--radius);
+  background: var(--non-raise);
+}
+.worked-setup {
+  font-size: 14px;
+  color: var(--non-dim);
+  font-style: italic;
+  margin: 0 0 12px;
+}
+.worked-model {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--non-strong);
+  margin: 0 0 10px;
+}
+
+.card-required {
+  border-color: var(--non-accent);
+}

@@ -12,7 +12,7 @@ import { getSkus } from '../content/registry.js'
 export default function Flashcards() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { state, gradeFlashcard } = useStore()
+  const { state, gradeFlashcard, completeFlashcardRound } = useStore()
   const skus = getSkus(state.lang)
 
   // Build the queue once. "Review" answers push the card to the back.
@@ -43,7 +43,11 @@ export default function Flashcards() {
     gradeFlashcard(`sku:${sku.id}`, got)
     setSeen((n) => n + 1)
     setFlipped(false)
-    setQueue((q) => (got ? q.slice(1) : [...q.slice(1), q[0]]))
+    setQueue((q) => {
+      const nextQ = got ? q.slice(1) : [...q.slice(1), q[0]]
+      if (nextQ.length === 0) completeFlashcardRound() // a full round done
+      return nextQ
+    })
   }
 
   return (
