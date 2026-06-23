@@ -23,6 +23,10 @@
 // dish you lead with, and the tasting note is revealed as the answer.
 // `serviceSituation` anchors when to reach for it. These read as the active-
 // recall prompts in flashcard mode.
+// Tasting (PROFILE), pairings and serve are NON's official copy from non.world
+// (the Shopify store). The bottle images are NON's official product shots.
+// `scenario` and `serviceSituation` are training aids aligned to the official
+// pairings.
 export const skus = [
   {
     id: 'NON1',
@@ -30,14 +34,13 @@ export const skus = [
     name: 'Salted Raspberry & Chamomile',
     format: 'Sparkling',
     still: false,
-    draft: true,
-    scenario: 'A guest sits down, is not drinking, and wants something to open the evening with.',
-    serviceSituation: 'The aperitif. The easy, confident first pour.',
-    tasting:
-      'Raspberry led, with a saline edge that keeps it dry. Chamomile softens the finish. Bright, not sweet.',
-    glassware: 'White wine stem',
-    serveTemp: '6 to 8 C, well chilled',
-    pairings: ['Cured salmon', 'Goats cheese', 'Tomato and burrata'],
+    image: '/bottles/NON1.jpg',
+    scenario: 'A guest opening the evening wants something bright and dry.',
+    serviceSituation: 'The aperitif. Balanced, sweet and salty, with a floral finish.',
+    tasting: 'Balanced, sweet and salty. Chamomile provides lingering tannins for a floral finish.',
+    glassware: 'Wine glass',
+    serveTemp: 'Chilled',
+    pairings: ['Citrus-forward salad', 'Creamy desserts', 'Cured meats'],
   },
   {
     id: 'NON2',
@@ -45,14 +48,13 @@ export const skus = [
     name: 'Caramelised Pear & Kombu',
     format: 'Sparkling',
     still: false,
-    draft: true,
-    scenario: 'A guest orders the roast chicken or a mushroom dish and wants something savoury, not sweet.',
-    serviceSituation: 'The savoury pour. Reach for it with umami and white meat.',
-    tasting:
-      'Roasted pear and a deep umami base from kombu. Savoury and rounded, with a long, dry finish.',
-    glassware: 'White wine stem',
-    serveTemp: '6 to 8 C, well chilled',
-    pairings: ['Roast chicken', 'Mushroom risotto', 'Aged hard cheese'],
+    image: '/bottles/NON2.jpg',
+    scenario: 'A guest on a cheese board or roasted mains wants something savoury and bold.',
+    serviceSituation: 'The bold, savoury pour. Buttery body with kombu minerality.',
+    tasting: 'Bold body with a buttery texture. Minerality from kombu with a lingering spice finish.',
+    glassware: 'Wine glass',
+    serveTemp: 'Chilled',
+    pairings: ['Desserts', 'Cheese boards', 'Roasted meats and mushrooms'],
   },
   {
     id: 'NON3',
@@ -60,14 +62,13 @@ export const skus = [
     name: 'Toasted Cinnamon & Yuzu',
     format: 'Still',
     still: true,
-    draft: true,
-    scenario: 'A guest is eating duck or a spiced autumn plate and wants a still drink with grip.',
-    serviceSituation: 'The still bridge between spice and citrus. Lightly chilled, red wine stem.',
-    tasting:
-      'Warm toasted spice lifted by sharp yuzu citrus. Still, textural, with grip on the finish.',
-    glassware: 'Red wine stem',
-    serveTemp: '10 to 12 C, lightly chilled',
-    pairings: ['Duck', 'Pork belly', 'Squash and sage'],
+    image: '/bottles/NON3.jpg',
+    scenario: 'A guest on fresh seafood or antipasti wants something bright with a savoury edge.',
+    serviceSituation: 'The bright, tart still. Savoury undertone, strong with seafood.',
+    tasting: 'Bright, tart and balanced with a savoury undertone.',
+    glassware: 'Wine glass',
+    serveTemp: 'Chilled',
+    pairings: ['Miso-glazed vegetables', 'Antipasti', 'Fresh seafood'],
   },
   {
     id: 'NON5',
@@ -75,14 +76,13 @@ export const skus = [
     name: 'Lemon Marmalade & Hibiscus',
     format: 'Sparkling',
     still: false,
-    draft: true,
-    scenario: 'A guest starts on oysters or fried, salty food and wants something to cut through it.',
-    serviceSituation: 'The sharpest pour. Built for shellfish, brine and fat.',
-    tasting:
-      'Bitter lemon marmalade over floral hibiscus. Tart and aromatic, with a clean, bracing finish.',
-    glassware: 'White wine stem',
-    serveTemp: '6 to 8 C, well chilled',
-    pairings: ['Oysters', 'Ceviche', 'Fried chicken'],
+    image: '/bottles/NON5.jpg',
+    scenario: 'A guest on a spiced curry or grain salad wants something tart and floral.',
+    serviceSituation: 'Tart citrus and florals. Made for spice and herbs.',
+    tasting: 'Tart native citrus, floral body, with a menthol aroma and finish.',
+    glassware: 'Wine glass',
+    serveTemp: 'Chilled',
+    pairings: ['Grain salads', 'South-East Asian curry', 'Stewed lamb and chickpeas'],
   },
   {
     id: 'NON7',
@@ -90,14 +90,13 @@ export const skus = [
     name: 'Stewed Cherry & Coffee',
     format: 'Sparkling',
     still: false,
-    draft: true,
-    scenario: 'A guest is not drinking but wants something that drinks like a red alongside charcuterie.',
-    serviceSituation: 'The boldest sparkling. Reach for it when they ask for something like a red.',
-    tasting:
-      'Dark stewed cherry with a roasted coffee backbone. The most red-wine-like of the sparkling range. Dry and structured.',
-    glassware: 'Red wine stem',
-    serveTemp: '8 to 10 C',
-    pairings: ['Charcuterie', 'Beef', 'Dark chocolate'],
+    image: '/bottles/NON7.jpg',
+    scenario: 'A guest after charcuterie or dark chocolate wants something rich that drinks like a red.',
+    serviceSituation: 'The boldest sparkling. Rich dark fruit with coffee undertones.',
+    tasting: 'Rich dark fruits, a spice nose, and undertones of coffee.',
+    glassware: 'Wine glass',
+    serveTemp: 'Chilled',
+    pairings: ['Dark chocolate', 'Stuffed mushrooms', 'Charcuterie'],
   },
   {
     id: 'NON9',
@@ -105,14 +104,13 @@ export const skus = [
     name: 'Oaked Blackberry & Plum',
     format: 'Still',
     still: true,
-    draft: true,
-    scenario: 'A committed red drinker is finishing on lamb and is not drinking tonight.',
-    serviceSituation: 'The pour for the red drinker. Full bodied, tannic, cellar temperature.',
-    tasting:
-      'Ripe blackberry and plum carried on soft oak. Still, full bodied, with tannic structure that reads like a red.',
-    glassware: 'Red wine stem',
-    serveTemp: '12 to 14 C',
-    pairings: ['Lamb', 'Aged cheese', 'Slow braises'],
+    image: '/bottles/NON9.jpg',
+    scenario: 'A guest finishing on steak or ragù wants something full and structured.',
+    serviceSituation: 'The full, tannic still. Dark berries and firm tannins.',
+    tasting: 'Dark berries with forest-floor earthiness, firm tannins, and a spiced finish.',
+    glassware: 'Wine glass',
+    serveTemp: 'Chilled',
+    pairings: ['Steak', 'Ragù', 'Barbecued vegetables'],
   },
 ]
 

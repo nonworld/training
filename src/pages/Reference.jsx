@@ -44,6 +44,9 @@ export default function Reference() {
       <div className="sku-grid">
         {skus.map((s) => (
           <article key={s.id} className="sku-card">
+            {s.image && (
+              <img className="sku-bottle" src={s.image} alt={`${s.code} bottle`} loading="lazy" />
+            )}
             <div className="sku-card-head">
               <span className="sku-code">{s.code}</span>
               <span className="chip">{s.format}</span>

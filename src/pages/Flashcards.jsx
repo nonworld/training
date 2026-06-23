@@ -74,6 +74,9 @@ export default function Flashcards() {
               <span className="sku-code">{sku.code}</span>
               <span className="chip">{sku.format}</span>
             </div>
+            {sku.image && (
+              <img className="sku-bottle flash-bottle" src={sku.image} alt={`${sku.code} bottle`} loading="lazy" />
+            )}
             <h2 className="sku-name">{sku.name}</h2>
             <p className="flashcard-tasting">{sku.tasting}</p>
             <div className="pair-row">

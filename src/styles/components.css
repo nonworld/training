@@ -961,3 +961,18 @@
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+
+/* Bottle product shots on the SKU cards and flashcard reveal. The images sit on
+ * white; multiply blends that into the off-white card so no hard box shows. */
+.sku-bottle {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  margin: -4px 0 10px;
+}
+.flash-bottle {
+  height: 150px;
+  margin: 8px 0;
+}
