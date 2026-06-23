@@ -183,7 +183,7 @@ const brandStory = {
   id: 'brand-story',
   track: 'shared',
   status: 'ready',
-  eyebrow: 'Shared core',
+  eyebrow: 'Foundations',
   title: 'Brand Story',
   summary:
     'Why premium non-alcoholic exists, and the case for trading up rather than down. The story behind every pour.',
@@ -305,7 +305,7 @@ const categoryContext = {
   spacedRecall: { count: 3 },
   track: 'shared',
   status: 'ready',
-  eyebrow: 'Shared core',
+  eyebrow: 'Foundations',
   title: 'Category & Market Context',
   summary:
     'Where premium non-alcoholic sits today, who is drinking it, and why venues are listing it now.',
@@ -427,7 +427,7 @@ const repListPlacement = {
   spacedRecall: { count: 3 },
   track: 'rep',
   status: 'ready',
-  eyebrow: 'Rep track',
+  eyebrow: 'In the field',
   title: 'List Placement & the Venue Pitch',
   summary: 'Win the listing and place NON beside the wine, not the soft drinks.',
   objectives: [
@@ -547,7 +547,7 @@ const repReadingProgram = {
   spacedRecall: { count: 3 },
   track: 'rep',
   status: 'ready',
-  eyebrow: 'Rep track',
+  eyebrow: 'In the field',
   title: 'Reading a Beverage Program',
   summary: 'Read a venue list like a buyer and find the gap NON fills.',
   objectives: [
@@ -643,7 +643,7 @@ const repObjections = {
   id: 'rep-objections',
   track: 'rep',
   status: 'ready',
-  eyebrow: 'Rep track',
+  eyebrow: 'In the field',
   title: 'Commercial Objection Handling',
   summary: 'Answer the three objections you will hear most: price, fridge space, and "we already have something".',
   objectives: [
@@ -749,7 +749,7 @@ const repDistributor = {
   id: 'rep-distributor',
   track: 'rep',
   status: 'ready',
-  eyebrow: 'Rep track',
+  eyebrow: 'In the field',
   title: 'Distributor & Reorder Conversations',
   summary: 'Keep stock moving and reorders flowing so a venue never runs dry on the hero SKU.',
   objectives: [
@@ -828,7 +828,7 @@ const repAccountPlanning = {
   id: 'rep-account-planning',
   track: 'rep',
   status: 'ready',
-  eyebrow: 'Rep track',
+  eyebrow: 'In the field',
   title: 'Account Planning',
   summary: 'Build and work a territory with intent, one account at a time.',
   objectives: [
@@ -936,7 +936,7 @@ const venueRecommending = {
   spacedRecall: { count: 3 },
   track: 'venue',
   status: 'ready',
-  eyebrow: 'Venue track',
+  eyebrow: 'On the floor',
   title: 'Recommending NON to a Guest',
   summary: 'Read the table and make the call, the same way you would recommend a wine.',
   objectives: [
@@ -1044,7 +1044,7 @@ const venueTradeUp = {
   id: 'venue-trade-up',
   track: 'venue',
   status: 'ready',
-  eyebrow: 'Venue track',
+  eyebrow: 'On the floor',
   title: 'The Trade-Up Conversation',
   summary: 'Turn "just a water" into a considered pour.',
   objectives: [
@@ -1150,7 +1150,7 @@ const venueServeRitual = {
   id: 'venue-serve-ritual',
   track: 'venue',
   status: 'ready',
-  eyebrow: 'Venue track',
+  eyebrow: 'On the floor',
   title: 'Pour, Temperature & Glassware Ritual',
   summary: 'Serve NON with the same ritual as wine: right glass, right temperature, poured at the table.',
   objectives: [
@@ -1260,7 +1260,7 @@ const venuePairingMenu = {
   spacedRecall: { count: 3 },
   track: 'venue',
   status: 'ready',
-  eyebrow: 'Venue track',
+  eyebrow: 'On the floor',
   title: 'Pairing to a Real Menu',
   summary: 'Pair the range across an actual menu, course by course.',
   objectives: [
@@ -1369,7 +1369,7 @@ const venueScepticalGuest = {
   spacedRecall: { count: 3 },
   track: 'venue',
   status: 'ready',
-  eyebrow: 'Venue track',
+  eyebrow: 'On the floor',
   title: 'Handling the Sceptical Guest',
   summary: 'Win over the guest who expects sugar water and has been let down by bad non-alc before.',
   objectives: [
@@ -1470,7 +1470,7 @@ const productFoundation = {
   id: 'product-foundation',
   track: 'shared',
   status: 'ready',
-  eyebrow: 'Shared core',
+  eyebrow: 'Foundations',
   title: 'The Six and the Structure',
   summary:
     'The six SKUs at a glance: still versus sparkling, and why NON is built on structure, not sweetness. Learn them cold.',
@@ -1630,7 +1630,7 @@ const productPairing = {
   id: 'product-pairing',
   track: 'shared',
   status: 'ready',
-  eyebrow: 'Shared core',
+  eyebrow: 'Foundations',
   title: 'Pairing Like a Somm',
   summary:
     'Three pairing principles, a worked example, then guided practice. Turn knowing the six into pairing them on the fly.',
