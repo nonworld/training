@@ -22,6 +22,7 @@ export const LANGUAGES = [
   { code: 'nl-BE', label: 'Nederlands (België)', flag: '🇧🇪', translated: false, dir: 'ltr' },
   { code: 'pl', label: 'Polski', flag: '🇵🇱', translated: false, dir: 'ltr' },
   { code: 'th', label: 'ไทย', flag: '🇹🇭', translated: false, dir: 'ltr' },
+  { code: 'zh', label: '简体中文', flag: '🇨🇳', translated: false, dir: 'ltr' },
 ]
 
 export const DEFAULT_LANG = 'en'

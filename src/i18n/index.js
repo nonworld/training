@@ -17,6 +17,7 @@ import nl from './locales/nl.js'
 import nlBE from './locales/nl-BE.js'
 import pl from './locales/pl.js'
 import th from './locales/th.js'
+import zh from './locales/zh.js'
 
 const resources = {
   en: { translation: en },
@@ -29,6 +30,7 @@ const resources = {
   'nl-BE': { translation: nlBE },
   pl: { translation: pl },
   th: { translation: th },
+  zh: { translation: zh },
 }
 
 export function initI18n(initialLang) {

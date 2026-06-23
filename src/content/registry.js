@@ -12,8 +12,9 @@ import nl from './nl.js'
 import nlBE from './nl-BE.js'
 import pl from './pl.js'
 import th from './th.js'
+import zh from './zh.js'
 
-const REGISTRY = { en, de, fr, es, ja, ko, nl, 'nl-BE': nlBE, pl, th }
+const REGISTRY = { en, de, fr, es, ja, ko, nl, 'nl-BE': nlBE, pl, th, zh }
 
 export function getContent(code) {
   return REGISTRY[code] || en
