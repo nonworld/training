@@ -74,6 +74,7 @@ export default function RoleSelect() {
               className={`lang-chip ${state.lang === l.code ? 'active' : ''}`}
               onClick={() => chooseLang(l.code)}
             >
+              <span aria-hidden="true" className="lang-flag">{l.flag}</span>
               {l.label}
               {!l.translated && <span className="lang-chip-flag" aria-hidden="true">·</span>}
             </button>

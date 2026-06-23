@@ -8,12 +8,14 @@
 // rather than broken.
 //
 // `dir` is reserved for future RTL markets (Arabic, Hebrew); none stubbed yet.
+// `flag` is the emoji shown beside each language in the switcher.
 export const LANGUAGES = [
-  { code: 'en', label: 'English', translated: true, dir: 'ltr' },
-  { code: 'de', label: 'Deutsch', translated: false, dir: 'ltr' },
-  { code: 'fr', label: 'Français', translated: false, dir: 'ltr' },
-  { code: 'es', label: 'Español', translated: false, dir: 'ltr' },
-  { code: 'ja', label: '日本語', translated: false, dir: 'ltr' },
+  { code: 'en', label: 'English', flag: '🇬🇧', translated: true, dir: 'ltr' },
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪', translated: false, dir: 'ltr' },
+  { code: 'fr', label: 'Français', flag: '🇫🇷', translated: false, dir: 'ltr' },
+  { code: 'es', label: 'Español', flag: '🇪🇸', translated: false, dir: 'ltr' },
+  { code: 'ja', label: '日本語', flag: '🇯🇵', translated: false, dir: 'ltr' },
+  { code: 'ko', label: '한국어', flag: '🇰🇷', translated: false, dir: 'ltr' },
 ]
 
 export const DEFAULT_LANG = 'en'

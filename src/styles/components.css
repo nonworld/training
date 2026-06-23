@@ -908,3 +908,13 @@
   letter-spacing: 0.04em;
   color: var(--non-dim);
 }
+
+/* Language flag emoji in the switcher button, sheet rows and onboarding chips. */
+.lang-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+.lang-row-label .lang-flag,
+.lang-chip .lang-flag {
+  margin-right: 8px;
+}

@@ -27,7 +27,7 @@ export default function LanguageSwitcher() {
         aria-label={t('nav.language')}
         aria-haspopup="dialog"
       >
-        <span aria-hidden="true" className="lang-globe">◌</span>
+        <span aria-hidden="true" className="lang-flag">{current.flag}</span>
         <span className="lang-code">{current.code.toUpperCase()}</span>
       </button>
 
@@ -48,7 +48,10 @@ export default function LanguageSwitcher() {
                     className={`lang-row ${l.code === state.lang ? 'active' : ''}`}
                     onClick={() => choose(l.code)}
                   >
-                    <span className="lang-row-label">{l.label}</span>
+                    <span className="lang-row-label">
+                      <span aria-hidden="true" className="lang-flag">{l.flag}</span>
+                      {l.label}
+                    </span>
                     <span className="lang-row-meta">
                       {!l.translated && <span className="draft">Untranslated</span>}
                       {l.code === state.lang && <span aria-hidden="true">✓</span>}

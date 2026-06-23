@@ -12,6 +12,7 @@ import de from './locales/de.js'
 import fr from './locales/fr.js'
 import es from './locales/es.js'
 import ja from './locales/ja.js'
+import ko from './locales/ko.js'
 
 const resources = {
   en: { translation: en },
@@ -19,6 +20,7 @@ const resources = {
   fr: { translation: fr },
   es: { translation: es },
   ja: { translation: ja },
+  ko: { translation: ko },
 }
 
 export function initI18n(initialLang) {
