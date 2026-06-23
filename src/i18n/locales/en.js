@@ -35,7 +35,7 @@ export default {
       'Win rewards as you complete',
     ],
     shared: 'Shared core for both roles',
-    continueAs: 'Start as {{role}}',
+    continueAs: "Let's go",
     pickToStart: 'Choose a track to start',
     change: 'Change role',
   },
