@@ -1084,14 +1084,15 @@
 .spectrum-row {
   position: relative;
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding: 9px 0;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
 }
 .spectrum-dot {
   position: absolute;
   left: -25px;
-  top: 14px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 11px;
   height: 11px;
   border-radius: 999px;
@@ -1099,12 +1100,20 @@
   border: 2px solid var(--non-dark);
 }
 .spectrum-code {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  min-width: 48px;
+  font-size: 16px;
+  min-width: 56px;
 }
 .spectrum-cue {
   font-size: 14px;
   color: var(--non-dim);
+}
+
+/* Crisp, kerned treatment for the NON1..NON9 codes wherever they appear. */
+.sku-code,
+.lineup-code,
+.spectrum-code {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "tnum" 1;
 }
